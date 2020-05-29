@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inspector-deployment
+  labels:
+    app: inspector
+    version: latest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inspector
+  template:
+    metadata:
+      labels:
+        app: inspector
+    spec:
+      containers:
+      - name: inspector
+        image: inspector:1.0.0
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8081

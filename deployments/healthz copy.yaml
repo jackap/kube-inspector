@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthz-deployment-2
+  labels:
+    app: healthz-2
+    version: latest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: healthz-2
+  template:
+    metadata:
+      labels:
+        app: healthz-2
+    spec:
+      hostname: health-check-2
+      subdomain: healthz
+      containers:
+      - name: healthz-2
+        image: jackops-healthz:1.0.0
+        imagePullPolicy: Never
