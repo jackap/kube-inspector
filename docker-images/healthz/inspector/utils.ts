@@ -1,0 +1,1 @@
+export const pprint = (element: any) => console.log(JSON.stringify(element, null, '\t'));
