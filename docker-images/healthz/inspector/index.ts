@@ -12,20 +12,15 @@ nmap.nmapLocation = 'nmap'; //default
 
 
 function processData(data: Array<NmapResult>) :void {
-  const podsInDefaultNamespace = data.filter(
-      (entry:NmapResult) => entry.hostname != null && entry.hostname.includes("default"))
-  //pprint(getNamespaces(data))
   pprint(
       getServicesRunningOnNamespaces(data)
   )
+  pprint(data)
 }
 
-/*let quickscan = new nmap.QuickScan(ipRange);
+let quickscan = new nmap.QuickScan(ipRange);
 quickscan.on('complete', function(data: Array<NmapResult>){
-  const hostnames = data.map( (entry:NmapResult) => entry.hostname)
-  console.log("Hostnames")
-  console.log(hostnames.toString())
-  console.log(data)
+  processData(data)
 });
 
 quickscan.on('error', function(error: Error){
@@ -33,10 +28,3 @@ quickscan.on('error', function(error: Error){
 });
 
  quickscan.startScan();
-*/
-
-/*
-
-                "annotation.io.kubernetes.container.ports": "[{\"containerPort\":8080,\"protocol\":\"TCP\"},{\"containerPort\":15010,\"protocol\":\"TCP\"},{\"containerPort\":15017,\"protocol\":\"TCP\"},{\"containerPort\":15053,\"protocol\":\"TCP\"}]",
-* 10.1.0.4:8080/debug/authorizationz
-* */

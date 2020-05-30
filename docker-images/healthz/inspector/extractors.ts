@@ -1,3 +1,4 @@
+import {NmapResult} from "./interfaces";
 
 export const getNamespace = (hostname: string|null) => hostname ? hostname.split('.')[2] : "None"
 export const getService = (hostname: string|null) => hostname ? hostname.split('.')[1] : "None"
