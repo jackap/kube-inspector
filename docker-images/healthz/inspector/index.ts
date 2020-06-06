@@ -1,6 +1,6 @@
 import {pprint} from "./utils";
 import {NmapResult} from "./interfaces";
-import {getServicesRunningOnNamespaces} from "./extractors";
+import {getServicesRunningOnNamespaces, printDNSResults} from "./extractors";
 // @ts-ignore
 const nmap = require('node-nmap')
 
@@ -12,10 +12,13 @@ nmap.nmapLocation = 'nmap'; //default
 
 
 function processData(data: Array<NmapResult>) :void {
+  // pprint(data);
   pprint(
       getServicesRunningOnNamespaces(data)
-  )
-  pprint(data)
+  );
+  printDNSResults(
+      data
+  );
 }
 
 let quickscan = new nmap.QuickScan(ipRange);

@@ -1,5 +1,22 @@
 import {NmapResult} from "./interfaces";
+// @ts-ignore
+const dns = require('dns');
 
+export const hasDefaultHostname = (hostname: string|null) => hostname ? hostname.split('.').length >3 : false
+export const getDnsNames = (hostname: string | null) => {
+    dns.lookup(hostname,(_err: any, address: any, _family: any) =>{
+        console.log("--------------------------------------")
+        console.log(`${hostname} : ${address}`)
+    })
+    dns.lookup(getService(hostname),(_err: any, address: any, _family: any) =>{
+        console.log(`${getService(hostname)} : ${address}`)
+        console.log("--------------------------------------")
+    })
+}
+export const printDNSResults = (data: Array<NmapResult>) => {
+    data.filter( element => hasDefaultHostname(element.hostname))
+        .forEach(entry => getDnsNames(entry.hostname))
+}
 export const getNamespace = (hostname: string|null) => hostname ? hostname.split('.')[2] : "None"
 export const getService = (hostname: string|null) => hostname ? hostname.split('.')[1] : "None"
 export const getServicesRunningOnNamespaces = (data: Array<NmapResult>) => data.reduce((acc:any,current) => {
