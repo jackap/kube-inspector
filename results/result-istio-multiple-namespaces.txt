@@ -1,0 +1,252 @@
+
+> inspector@1.0.0 start /inspector
+> tsc && node index.js
+
++++++++++++++ SCANNING IP RANGE 10.88.0.4/24 +++++++++++++
+{
+	"None": [
+		"None",
+		"None",
+		"None",
+		"None",
+		"None",
+		"None",
+		"None",
+		"None",
+		"None",
+		"None",
+		"None",
+		"None",
+		"None"
+	],
+	"kube-system": [
+		"kube-dns",
+		"kube-dns"
+	],
+	"istio-system": [
+		"istiod",
+		"istio-egressgateway",
+		"istio-ingressgateway",
+		"zipkin",
+		"grafana",
+		"kiali",
+		"prometheus"
+	]
+}
+[
+	{
+		"hostname": null,
+		"ip": "10.88.0.1",
+		"mac": "AA:16:63:28:C0:5F",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-2.kube-dns.kube-system.svc.cluster.local",
+		"ip": "10.88.0.2",
+		"mac": "8E:28:DD:D7:BB:9C",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-3.kube-dns.kube-system.svc.cluster.local",
+		"ip": "10.88.0.3",
+		"mac": "7A:50:B8:DC:03:EF",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-5.istiod.istio-system.svc.cluster.local",
+		"ip": "10.88.0.5",
+		"mac": "A6:4F:D8:E0:04:E4",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-6.istio-egressgateway.istio-system.svc.cluster.local",
+		"ip": "10.88.0.6",
+		"mac": "F2:C2:84:1F:B6:70",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-7.istio-ingressgateway.istio-system.svc.cluster.local",
+		"ip": "10.88.0.7",
+		"mac": "6A:87:76:14:98:19",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-8.zipkin.istio-system.svc.cluster.local",
+		"ip": "10.88.0.8",
+		"mac": "86:3C:D6:FE:A0:21",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-9.grafana.istio-system.svc.cluster.local",
+		"ip": "10.88.0.9",
+		"mac": "5A:8C:6B:46:92:5C",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-10.kiali.istio-system.svc.cluster.local",
+		"ip": "10.88.0.10",
+		"mac": "16:58:1B:BC:79:83",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-11.prometheus.istio-system.svc.cluster.local",
+		"ip": "10.88.0.11",
+		"mac": "06:70:58:0F:B7:BF",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.12",
+		"mac": "CA:2B:C8:FD:EF:8A",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.13",
+		"mac": "B2:B8:E4:FF:E7:ED",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.14",
+		"mac": "52:DC:68:90:15:55",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.15",
+		"mac": "7A:8E:85:99:EB:B0",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.16",
+		"mac": "06:17:44:56:58:4B",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.17",
+		"mac": "9E:8D:6F:6D:16:A0",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.18",
+		"mac": "A2:51:BE:6D:D6:02",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.19",
+		"mac": "F2:0F:71:93:C9:78",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.20",
+		"mac": "FE:E0:27:52:C8:54",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.21",
+		"mac": "82:ED:36:7F:05:68",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.22",
+		"mac": "FE:3A:FD:CC:5B:F1",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.23",
+		"mac": "FA:F0:7C:EF:A8:74",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "inspector-deployment-695f784cc4-f57pw",
+		"ip": "10.88.0.4",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	}
+]
+
+------------10-88-0-2.kube-dns.kube-system.svc.cluster.local----------------
+
+10-88-0-2.kube-dns.kube-system.svc.cluster.local : 10.88.0.2
+kube-dns : 10.96.0.10
+--------------------------------------
+
+------------10-88-0-3.kube-dns.kube-system.svc.cluster.local----------------
+
+10-88-0-3.kube-dns.kube-system.svc.cluster.local : 10.88.0.3
+kube-dns : 10.96.0.10
+--------------------------------------
+istiod : 10.102.247.40
+--------------------------------------
+
+------------10-88-0-5.istiod.istio-system.svc.cluster.local----------------
+
+10-88-0-5.istiod.istio-system.svc.cluster.local : 10.88.0.5
+
+------------10-88-0-6.istio-egressgateway.istio-system.svc.cluster.local----------------
+
+10-88-0-6.istio-egressgateway.istio-system.svc.cluster.local : 10.88.0.6
+
+------------10-88-0-7.istio-ingressgateway.istio-system.svc.cluster.local----------------
+
+10-88-0-7.istio-ingressgateway.istio-system.svc.cluster.local : 10.88.0.7
+istio-ingressgateway : 10.103.219.148
+--------------------------------------
+
+------------10-88-0-8.zipkin.istio-system.svc.cluster.local----------------
+
+10-88-0-8.zipkin.istio-system.svc.cluster.local : 10.88.0.8
+zipkin : 10.109.59.122
+--------------------------------------
+istio-egressgateway : 10.111.51.157
+--------------------------------------
+
+------------10-88-0-9.grafana.istio-system.svc.cluster.local----------------
+
+10-88-0-9.grafana.istio-system.svc.cluster.local : 10.88.0.9
+
+------------10-88-0-10.kiali.istio-system.svc.cluster.local----------------
+
+10-88-0-10.kiali.istio-system.svc.cluster.local : 10.88.0.10
+grafana : 10.109.193.127
+--------------------------------------
+kiali : 10.106.153.23
+--------------------------------------
+prometheus : 10.105.90.205
+--------------------------------------
+
+------------10-88-0-11.prometheus.istio-system.svc.cluster.local----------------
+
+10-88-0-11.prometheus.istio-system.svc.cluster.local : 10.88.0.11

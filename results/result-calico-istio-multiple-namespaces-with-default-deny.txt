@@ -1,0 +1,15 @@
+
+> inspector@1.0.0 start /inspector
+> tsc && node index.js
+
++++++++++++++ SCANNING IP RANGE 172.16.120.65/24 +++++++++++++
+{}
+[
+	{
+		"hostname": "inspector-deployment-695f784cc4-2hxbs",
+		"ip": "172.16.120.65",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	}
+]

@@ -1,0 +1,293 @@
+
+
+> inspector@1.0.0 start /inspector
+> tsc && node index.js
+
++++++++++++++ SCANNING IP RANGE 172.16.120.65/24 +++++++++++++
+{
+	"None": [
+		"None",
+		"None"
+	],
+	"istio-system": [
+		"istiod",
+		"zipkin",
+		"grafana",
+		"istio-egressgateway",
+		"istio-ingressgateway",
+		"kiali",
+		"prometheus"
+	],
+	"default": [
+		"details",
+		"ratings",
+		"reviews",
+		"productpage",
+		"reviews",
+		"reviews"
+	],
+	"test-namespace": [
+		"details",
+		"reviews",
+		"reviews",
+		"reviews",
+		"ratings"
+	]
+}
+[
+	{
+		"hostname": null,
+		"ip": "172.16.120.64",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-66.istiod.istio-system.svc.cluster.local",
+		"ip": "172.16.120.66",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-67.zipkin.istio-system.svc.cluster.local",
+		"ip": "172.16.120.67",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-68.grafana.istio-system.svc.cluster.local",
+		"ip": "172.16.120.68",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-69.istio-egressgateway.istio-system.svc.cluster.local",
+		"ip": "172.16.120.69",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-70.istio-ingressgateway.istio-system.svc.cluster.local",
+		"ip": "172.16.120.70",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-71.kiali.istio-system.svc.cluster.local",
+		"ip": "172.16.120.71",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-72.prometheus.istio-system.svc.cluster.local",
+		"ip": "172.16.120.72",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-73.details.default.svc.cluster.local",
+		"ip": "172.16.120.73",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-74.ratings.default.svc.cluster.local",
+		"ip": "172.16.120.74",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-75.reviews.default.svc.cluster.local",
+		"ip": "172.16.120.75",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-76.productpage.default.svc.cluster.local",
+		"ip": "172.16.120.76",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-77.reviews.default.svc.cluster.local",
+		"ip": "172.16.120.77",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-78.details.test-namespace.svc.cluster.local",
+		"ip": "172.16.120.78",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-79.reviews.default.svc.cluster.local",
+		"ip": "172.16.120.79",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-80.reviews.test-namespace.svc.cluster.local",
+		"ip": "172.16.120.80",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-81.reviews.test-namespace.svc.cluster.local",
+		"ip": "172.16.120.81",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-82.reviews.test-namespace.svc.cluster.local",
+		"ip": "172.16.120.82",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "172-16-120-83.ratings.test-namespace.svc.cluster.local",
+		"ip": "172.16.120.83",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "172.16.120.84",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "inspector-deployment-695f784cc4-2hxbs",
+		"ip": "172.16.120.65",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	}
+]
+
+------------172-16-120-66.istiod.istio-system.svc.cluster.local----------------
+
+172-16-120-66.istiod.istio-system.svc.cluster.local : 172.16.120.66
+
+------------172-16-120-67.zipkin.istio-system.svc.cluster.local----------------
+
+172-16-120-67.zipkin.istio-system.svc.cluster.local : 172.16.120.67
+istiod : 10.109.35.119
+--------------------------------------
+zipkin : 10.101.179.88
+--------------------------------------
+
+------------172-16-120-68.grafana.istio-system.svc.cluster.local----------------
+
+172-16-120-68.grafana.istio-system.svc.cluster.local : 172.16.120.68
+
+------------172-16-120-69.istio-egressgateway.istio-system.svc.cluster.local----------------
+
+172-16-120-69.istio-egressgateway.istio-system.svc.cluster.local : 172.16.120.69
+grafana : 10.98.150.231
+--------------------------------------
+
+------------172-16-120-70.istio-ingressgateway.istio-system.svc.cluster.local----------------
+
+172-16-120-70.istio-ingressgateway.istio-system.svc.cluster.local : 172.16.120.70
+istio-egressgateway : 10.108.35.42
+--------------------------------------
+
+------------172-16-120-71.kiali.istio-system.svc.cluster.local----------------
+
+172-16-120-71.kiali.istio-system.svc.cluster.local : 172.16.120.71
+istio-ingressgateway : 10.104.232.84
+--------------------------------------
+
+------------172-16-120-72.prometheus.istio-system.svc.cluster.local----------------
+
+172-16-120-72.prometheus.istio-system.svc.cluster.local : 172.16.120.72
+kiali : 10.111.103.28
+--------------------------------------
+
+------------172-16-120-73.details.default.svc.cluster.local----------------
+
+172-16-120-73.details.default.svc.cluster.local : 172.16.120.73
+prometheus : 10.108.186.243
+--------------------------------------
+details : 10.98.166.105
+--------------------------------------
+ratings : 10.96.186.72
+--------------------------------------
+
+------------172-16-120-74.ratings.default.svc.cluster.local----------------
+
+172-16-120-74.ratings.default.svc.cluster.local : 172.16.120.74
+
+------------172-16-120-75.reviews.default.svc.cluster.local----------------
+
+172-16-120-75.reviews.default.svc.cluster.local : 172.16.120.75
+
+------------172-16-120-76.productpage.default.svc.cluster.local----------------
+
+172-16-120-76.productpage.default.svc.cluster.local : 172.16.120.76
+reviews : 10.105.164.29
+--------------------------------------
+
+------------172-16-120-77.reviews.default.svc.cluster.local----------------
+
+172-16-120-77.reviews.default.svc.cluster.local : 172.16.120.77
+productpage : 10.110.104.99
+--------------------------------------
+
+------------172-16-120-78.details.test-namespace.svc.cluster.local----------------
+
+172-16-120-78.details.test-namespace.svc.cluster.local : 172.16.120.78
+reviews : 10.105.164.29
+--------------------------------------
+
+------------172-16-120-79.reviews.default.svc.cluster.local----------------
+
+172-16-120-79.reviews.default.svc.cluster.local : 172.16.120.79
+details : 10.106.211.16
+--------------------------------------
+
+------------172-16-120-80.reviews.test-namespace.svc.cluster.local----------------
+
+172-16-120-80.reviews.test-namespace.svc.cluster.local : 172.16.120.80
+reviews : 10.105.164.29
+--------------------------------------
+
+------------172-16-120-81.reviews.test-namespace.svc.cluster.local----------------
+
+172-16-120-81.reviews.test-namespace.svc.cluster.local : 172.16.120.81
+reviews : 10.99.148.99
+--------------------------------------
+
+------------172-16-120-82.reviews.test-namespace.svc.cluster.local----------------
+
+172-16-120-82.reviews.test-namespace.svc.cluster.local : 172.16.120.82
+reviews : 10.99.148.99
+--------------------------------------
+reviews : 10.99.148.99
+--------------------------------------
+
+------------172-16-120-83.ratings.test-namespace.svc.cluster.local----------------
+
+172-16-120-83.ratings.test-namespace.svc.cluster.local : 172.16.120.83
+ratings : 10.105.174.79
+--------------------------------------

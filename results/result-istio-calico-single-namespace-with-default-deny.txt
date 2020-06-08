@@ -1,0 +1,250 @@
+
+> inspector@1.0.0 start /inspector
+> tsc && node index.js
+
++++++++++++++ SCANNING IP RANGE 10.88.0.4/24 +++++++++++++
+{
+	"None": [
+		"None",
+		"None"
+	],
+	"kube-system": [
+		"kube-dns",
+		"kube-dns"
+	],
+	"istio-system": [
+		"istiod",
+		"istio-egressgateway",
+		"istio-ingressgateway",
+		"jaeger-query",
+		"grafana",
+		"kiali",
+		"prometheus"
+	],
+	"default": [
+		"reviews",
+		"reviews",
+		"reviews",
+		"details",
+		"ratings",
+		"productpage"
+	]
+}
+[
+	{
+		"hostname": null,
+		"ip": "10.88.0.1",
+		"mac": "D2:B2:57:D9:36:37",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-2.kube-dns.kube-system.svc.cluster.local",
+		"ip": "10.88.0.2",
+		"mac": "E2:90:91:81:03:8F",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-3.kube-dns.kube-system.svc.cluster.local",
+		"ip": "10.88.0.3",
+		"mac": "06:07:58:27:39:08",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-5.istiod.istio-system.svc.cluster.local",
+		"ip": "10.88.0.5",
+		"mac": "B6:01:33:EF:0C:4E",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-6.istio-egressgateway.istio-system.svc.cluster.local",
+		"ip": "10.88.0.6",
+		"mac": "DA:B2:D6:5E:01:F4",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-7.istio-ingressgateway.istio-system.svc.cluster.local",
+		"ip": "10.88.0.7",
+		"mac": "A2:73:B0:34:B1:96",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-8.jaeger-query.istio-system.svc.cluster.local",
+		"ip": "10.88.0.8",
+		"mac": "FE:73:3C:26:F4:32",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-9.grafana.istio-system.svc.cluster.local",
+		"ip": "10.88.0.9",
+		"mac": "46:3B:64:28:72:CD",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-10.kiali.istio-system.svc.cluster.local",
+		"ip": "10.88.0.10",
+		"mac": "0A:52:63:D2:B7:28",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-11.prometheus.istio-system.svc.cluster.local",
+		"ip": "10.88.0.11",
+		"mac": "16:08:6B:ED:F0:79",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-12.reviews.default.svc.cluster.local",
+		"ip": "10.88.0.12",
+		"mac": "C6:69:7B:99:DE:CB",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-13.reviews.default.svc.cluster.local",
+		"ip": "10.88.0.13",
+		"mac": "62:90:7B:5A:4B:8F",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-14.reviews.default.svc.cluster.local",
+		"ip": "10.88.0.14",
+		"mac": "CA:08:60:84:64:23",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-15.details.default.svc.cluster.local",
+		"ip": "10.88.0.15",
+		"mac": "DA:7D:CD:A3:61:F2",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-16.ratings.default.svc.cluster.local",
+		"ip": "10.88.0.16",
+		"mac": "7A:24:25:8F:19:77",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "10-88-0-17.productpage.default.svc.cluster.local",
+		"ip": "10.88.0.17",
+		"mac": "8E:2F:6E:B5:F9:0A",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": null,
+		"ip": "10.88.0.18",
+		"mac": "52:2E:86:06:0B:08",
+		"openPorts": null,
+		"osNmap": null
+	},
+	{
+		"hostname": "inspector-deployment-695f784cc4-ljc7b",
+		"ip": "10.88.0.4",
+		"mac": null,
+		"openPorts": null,
+		"osNmap": null
+	}
+]
+
+------------10-88-0-2.kube-dns.kube-system.svc.cluster.local----------------
+
+10-88-0-2.kube-dns.kube-system.svc.cluster.local : 10.88.0.2
+kube-dns : 10.96.0.10
+--------------------------------------
+
+------------10-88-0-3.kube-dns.kube-system.svc.cluster.local----------------
+
+10-88-0-3.kube-dns.kube-system.svc.cluster.local : 10.88.0.3
+
+------------10-88-0-5.istiod.istio-system.svc.cluster.local----------------
+
+10-88-0-5.istiod.istio-system.svc.cluster.local : 10.88.0.5
+kube-dns : 10.96.0.10
+--------------------------------------
+
+------------10-88-0-6.istio-egressgateway.istio-system.svc.cluster.local----------------
+
+10-88-0-6.istio-egressgateway.istio-system.svc.cluster.local : 10.88.0.6
+istiod : 10.99.146.181
+--------------------------------------
+istio-egressgateway : 10.99.225.171
+--------------------------------------
+istio-ingressgateway : 10.106.240.81
+--------------------------------------
+
+------------10-88-0-7.istio-ingressgateway.istio-system.svc.cluster.local----------------
+
+10-88-0-7.istio-ingressgateway.istio-system.svc.cluster.local : 10.88.0.7
+
+------------10-88-0-8.jaeger-query.istio-system.svc.cluster.local----------------
+
+10-88-0-8.jaeger-query.istio-system.svc.cluster.local : 10.88.0.8
+
+------------10-88-0-9.grafana.istio-system.svc.cluster.local----------------
+
+10-88-0-9.grafana.istio-system.svc.cluster.local : 10.88.0.9
+jaeger-query : 10.96.98.65
+--------------------------------------
+
+------------10-88-0-10.kiali.istio-system.svc.cluster.local----------------
+
+10-88-0-10.kiali.istio-system.svc.cluster.local : 10.88.0.10
+grafana : 10.101.1.189
+--------------------------------------
+
+------------10-88-0-11.prometheus.istio-system.svc.cluster.local----------------
+
+10-88-0-11.prometheus.istio-system.svc.cluster.local : 10.88.0.11
+kiali : 10.106.236.98
+--------------------------------------
+prometheus : 10.105.62.33
+--------------------------------------
+
+------------10-88-0-12.reviews.default.svc.cluster.local----------------
+
+10-88-0-12.reviews.default.svc.cluster.local : 10.88.0.12
+
+------------10-88-0-13.reviews.default.svc.cluster.local----------------
+
+10-88-0-13.reviews.default.svc.cluster.local : 10.88.0.13
+reviews : 10.108.250.226
+--------------------------------------
+reviews : 10.108.250.226
+--------------------------------------
+
+------------10-88-0-14.reviews.default.svc.cluster.local----------------
+
+10-88-0-14.reviews.default.svc.cluster.local : 10.88.0.14
+reviews : 10.108.250.226
+--------------------------------------
+
+------------10-88-0-15.details.default.svc.cluster.local----------------
+
+10-88-0-15.details.default.svc.cluster.local : 10.88.0.15
+
+------------10-88-0-16.ratings.default.svc.cluster.local----------------
+
+10-88-0-16.ratings.default.svc.cluster.local : 10.88.0.16
+details : 10.104.91.243
+--------------------------------------
+
+------------10-88-0-17.productpage.default.svc.cluster.local----------------
+
+10-88-0-17.productpage.default.svc.cluster.local : 10.88.0.17
+ratings : 10.97.98.24
+--------------------------------------
+productpage : 10.107.43.5
+--------------------------------------
