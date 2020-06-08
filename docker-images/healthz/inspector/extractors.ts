@@ -4,11 +4,12 @@ const dns = require('dns');
 
 export const hasDefaultHostname = (hostname: string|null) => hostname ? hostname.split('.').length >3 : false
 export const getDnsNames = (hostname: string | null) => {
+    // TODO: Use promisified version
     dns.lookup(hostname,(_err: any, address: any, _family: any) =>{
-        console.log("--------------------------------------")
+        console.log(`\n------------${hostname}----------------\n`)
         console.log(`${hostname} : ${address}`)
     })
-    dns.lookup(getService(hostname),(_err: any, address: any, _family: any) =>{
+    dns.lookup(`${getService(hostname)}.${getNamespace(hostname)}`,(_err: any, address: any, _family: any) =>{
         console.log(`${getService(hostname)} : ${address}`)
         console.log("--------------------------------------")
     })
