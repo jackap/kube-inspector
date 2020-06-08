@@ -1,15 +1,16 @@
-apiVersion: crd.projectcalico.org/v1
-kind: GlobalNetworkPolicy
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
 metadata:
   name: default-deny
+  namespace: test-namespace
 spec:
-  selector: all()
-  types:
+  podSelector: {}
+  policyTypes:
   - Ingress
   - Egress
 ---
-apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
 metadata:
   name: default-deny
   namespace: default
