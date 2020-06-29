@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dockerode": "^3.2.0",
     "node-nmap": "^4.0.0"
   },
   "devDependencies": {
