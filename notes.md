@@ -36,6 +36,16 @@ Check kernel
 What can I see? 
 Fire traversal to connect with other containers
 
+## Useful commands
+```
+kubectl run --namespace=policy-demo access --rm -ti --image inspector:1.0.0 /bin/bash
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+https://github.com/projectcalico/calico/issues/1456
+https://docs.projectcalico.org/security/tutorials/kubernetes-policy-basic
+kubectl -n policy-demo delete networkpolicy access-nginx
+```
+
+
 ### How does it work for aws? 
 
 
@@ -67,4 +77,46 @@ networking model of kubernetes. He brought up the `CALICO` project which
 should help with network security. 
 I also saw a youtube video (https://www.youtube.com/watch?v=0zCHtrEJ9Bc) 
 in which there seems to be some differences between pods living in
-different namespaces. I need to read more about that (https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). 
+different namespaces. I need to read more about that (https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/).
+Discovered that with default settings one can access different namespaces. 
+Output of nmap does not return service names but dns canoncal names.
+I made a test for the two different dns names. Here is the output:
+````bash
+root@inspector-deployment-695f784cc4-fzz9v:/# nslookup productpage
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+Name:	productpage.default.svc.cluster.local
+Address: 10.106.203.227
+
+root@inspector-deployment-695f784cc4-fzz9v:/# nslookup 10-1-0-15.productpage.default.svc.cluster.local
+Server:		10.96.0.10
+Address:	10.96.0.10#53
+
+Name:	10-1-0-15.productpage.default.svc.cluster.local
+Address: 10.1.0.15
+```` 
+The DNS is the same and corresponds to: 
+
+`kube-system    service/kube-dns                    ClusterIP      10.96.0.10       <none>        53/UDP,53/TCP,9153/TCP      38m   k8s-app=kube-dns`
+
+Let's query it.-> Nothing interesting
+
+## Day 5 
+Test calico. Install calico. I cannot see also pods in other namspaces. As expected.
+TRY WITH RPCINFO https://computersecuritystudent.com/SECURITY_TOOLS/METASPLOITABLE/EXPLOIT/lesson4/index.html
+
+Try container running as complete root -> full vm access 
+what can they do?
+
+
+Try container with docker access
+
+
+
+## Day N 26/06
+Recap:
+- by default there is no network security in place in minikube
+- when istio (sidecars in general) is enabled, then there is still another chance to contact other clients
+- if docker context is sent to container, then a pod can access all the containers
+- 
