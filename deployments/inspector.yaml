@@ -21,3 +21,10 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 8081
+        volumeMounts:
+          - name: my-volume
+            mountPath: /var/run/
+      volumes:
+      - name: my-volume
+        hostPath:
+          path: /var/run/
