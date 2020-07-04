@@ -11,7 +11,7 @@ function restartMinikube() {
 
 function buildAndApplyInspector(){
     eval $(minikube -p minikube docker-env)
-    docker build -t inspector:1.0.0 ../docker-images/healthz
+    docker build -t inspector:1.0.0 ..
     kubectl apply -f ../deployments/inspector.yaml
 }
 
