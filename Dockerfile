@@ -7,4 +7,5 @@ COPY ./inspector/ ./inspector/
 ENTRYPOINT []
 CMD "cd inspector && npm install"
 WORKDIR ./inspector
+CMD "npm run build"
 CMD node server.js
