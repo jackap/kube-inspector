@@ -119,4 +119,5 @@ Recap:
 - by default there is no network security in place in minikube
 - when istio (sidecars in general) is enabled, then there is still another chance to contact other clients
 - if docker context is sent to container, then a pod can access all the containers
-- 
+- If you build a container as root, then you cannot run 
+it as a non-root container
