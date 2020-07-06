@@ -128,3 +128,25 @@ Refactor the codebase and move around stuff.
 Fix deployments of the docker image and make running the tests easier
 ######TODO: Update documentation to include the download of calico
  
+## Jul 06
+After the meeting with Tuomas, there are some things to improve in the service: 
+* Use web based api 
+* Add logging to a logfile with the following capabilities:
+    - json structured log-file.
+    - json structured output from web-service
+* Aim should be ``reporting connectivity`` or problems 
+on access within pods.
+* Testing the system with **helm**
+
+### Open questions
+- What more can we do?
+- Is there anything that could be done? 
+- Should we cover more service meshes or more networking solutions? 
+Is this beyond kubernetes?
+
+### Outcomes
+30 page reports with as many results as possible. 
+Should test it also to other systems. 
+Test with helm. 
+syslog entries as well
+ 
