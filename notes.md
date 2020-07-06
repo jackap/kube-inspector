@@ -121,3 +121,10 @@ Recap:
 - if docker context is sent to container, then a pod can access all the containers
 - If you build a container as root, then you cannot run 
 it as a non-root container
+- without calico it is even possible to connect to: `10.1.0.4:8080/debug/authorizationz`
+
+## Jul 03 
+Refactor the codebase and move around stuff.
+Fix deployments of the docker image and make running the tests easier
+######TODO: Update documentation to include the download of calico
+ 
