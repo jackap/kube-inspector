@@ -22,9 +22,9 @@ spec:
         ports:
         - containerPort: 8081
         volumeMounts:
-          - name: my-volume
+          - name: docker
             mountPath: /var/run/
       volumes:
-      - name: my-volume
+      - name: docker
         hostPath:
           path: /var/run/
