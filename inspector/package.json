@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "tsc && node src/index.js",
     "start:watch": "nodemon",
-    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "test": "mocha --timeout 10000 -r ts-node/register tests/**/*.test.ts",
     "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test"
   },
   "author": "",
@@ -15,6 +15,7 @@
   "dependencies": {
     "@types/express": "^4.17.7",
     "@types/node": "^14.0.14",
+    "@types/supertest": "^2.0.10",
     "dockerode": "^3.2.0",
     "event-to-promise": "^0.8.0",
     "express": "^4.17.1",
@@ -27,6 +28,7 @@
     "mocha": "^7.2.0",
     "nodemon": "^2.0.4",
     "nyc": "^15.0.1",
+    "supertest": "^4.0.2",
     "ts-node": "^8.10.2",
     "tslint": "^6.1.2",
     "typescript": "^3.9.3"
