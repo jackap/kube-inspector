@@ -1,8 +1,10 @@
-import express from 'express';
-// Create a new express app instance
-const app = express();
-app.get('/', function (req, res) {
-res.send('Hello World!');
-});
+import * as express from 'express';
+import {registerHealthCheck} from "./health";
 
-app.listen(8081, ()  => console.log('Inspector is listening on port 8081!'));
+export function createInspectorServer(): express.Application{
+    // @ts-ignore
+    const app = express();
+    registerHealthCheck(app);
+    return app
+}
+
