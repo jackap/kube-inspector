@@ -12,7 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^14.0.14",
     "dockerode": "^3.2.0",
+    "event-to-promise": "^0.8.0",
     "node-nmap": "^4.0.0"
   },
   "devDependencies": {

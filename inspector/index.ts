@@ -3,15 +3,14 @@ import {getIPAddresses, pprint} from "./utils";
 import {NmapResult} from "./interfaces";
 import {getServicesRunningOnNamespaces, printDNSResults} from "./extractors";
 // @ts-ignore
-const nmap = require('node-nmap');
+import * as nmap from 'node-nmap'
 // @ts-ignore
-var Docker = require('dockerode');
+const eventToPromise = require('event-to-promise');
 // @ts-ignore
-nmap.nmapLocation = 'nmap'; //default
+const Docker = require('dockerode');
 
 
-function processData(data: Array<NmapResult>) :void {
-  // pprint(data);
+function processData(data: NmapResult[]) :void {
   pprint(
       getServicesRunningOnNamespaces(data)
   );
@@ -20,7 +19,7 @@ function processData(data: Array<NmapResult>) :void {
   );
   pprint(data);
 
-var docker= new Docker(); //defaults to above if env variables are not used
+const docker = new Docker(); // defaults to above if env variables are not used
 docker.listImages(function (err: any, containers : [any]) {
 	if (!err && containers.length > 0){
 	console.log("Container has access to Docker");
@@ -29,19 +28,11 @@ docker.listImages(function (err: any, containers : [any]) {
 	console.log("Container has no access to Docker");
 	}
   });
-
 }
 
-getIPAddresses().forEach((ipRange) => {
+getIPAddresses().forEach(async (ipRange) => {
   console.log(`+++++++++++++ SCANNING IP RANGE ${ipRange} +++++++++++++`)
-let quickscan = new nmap.QuickScan(ipRange);
-quickscan.on('complete', function(data: Array<NmapResult>){
-  processData(data)
+  const scan = eventToPromise( new nmap.QuickScan(ipRange),'complete');
+  const result = await scan.then((data:any) => data);
+  processData(result)
 });
-
-quickscan.on('error', function(error: Error){
-  console.log(error);
-});
-
- quickscan.startScan();
-})
