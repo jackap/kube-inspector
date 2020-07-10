@@ -1,5 +1,5 @@
 import express from 'express'
-import {getInspectorOutput} from "./index";
+import {getInspectorOutput} from "./inspector";
 // @ts-ignore
 
 export const registerInspectEndpoint = (app: express.Application) => {
