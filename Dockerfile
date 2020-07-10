@@ -5,7 +5,7 @@ RUN apt-get install nodejs nmap  net-tools iputils-ping traceroute dnsutils curl
 
 COPY ./inspector/ ./inspector/
 ENTRYPOINT []
-CMD "cd inspector && npm install"
 WORKDIR ./inspector
-CMD "npm run build"
-CMD node main.js
+RUN npm install
+RUN npm run build
+CMD node src/main.js
