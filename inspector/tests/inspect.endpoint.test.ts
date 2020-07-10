@@ -22,7 +22,7 @@ describe('Inspect endpoint', () => {
                     'kiali',
                     'prometheus'
                 ],
-                default: [
+                default: [ // TODO: this should return a set
                     'details',
                     'ratings',
                     'reviews',
