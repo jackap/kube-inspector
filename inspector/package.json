@@ -1,11 +1,10 @@
 {
   "name": "inspector",
-  "version": "1.0.0",
   "description": "Test your kubernetes infrastructure",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node src/index.js",
+    "start": "tsc && node src/main.js",
     "start:watch": "nodemon",
     "test": "jest --coverage",
     "test:watch": "jest --watch"
