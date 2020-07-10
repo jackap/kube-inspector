@@ -1,25 +1,28 @@
 'use strict';
-import {getIPAddresses, pprint} from "./utils";
+import {getIPAddresses, pprint, scanIpRange} from "./utils";
 import {NmapResult} from "./interfaces";
-import {getServicesRunningOnNamespaces, printDNSResults} from "./extractors";
-// @ts-ignore
-import * as nmap from 'node-nmap'
-// @ts-ignore
-const eventToPromise = require('event-to-promise');
+import {getNamespace, getServicesRunningOnNamespaces, printDNSResults} from "./extractors";
+
+
 // @ts-ignore
 const Docker = require('dockerode');
 
-
-function processData(data: NmapResult[]) :void {
-  pprint(
+const getNamespaces  = (data: NmapResult[]): (string | undefined)[] => Array.from(new Set(data.map((entry: NmapResult) => getNamespace(entry.hostname))));
+export function processData(data: NmapResult[]) :any{
+    const retval = {
+      namespaces: getNamespaces(data),
+      services: getServicesRunningOnNamespaces(data),
+    }
+ /* pprint(
       getServicesRunningOnNamespaces(data)
   );
   printDNSResults(
       data
   );
-  pprint(data);
+  pprint(data);*/
 
-const docker = new Docker(); // defaults to above if env variables are not used
+  return retval;
+/*const docker = new Docker(); // defaults to above if env variables are not used
 docker.listImages(function (err: any, containers : [any]) {
 	if (!err && containers.length > 0){
 	console.log("Container has access to Docker");
@@ -27,12 +30,15 @@ docker.listImages(function (err: any, containers : [any]) {
 	else {
 	console.log("Container has no access to Docker");
 	}
-  });
+  });*/
 }
 
-getIPAddresses().forEach(async (ipRange) => {
-  console.log(`+++++++++++++ SCANNING IP RANGE ${ipRange} +++++++++++++`)
-  const scan = eventToPromise( new nmap.QuickScan(ipRange),'complete');
-  const result = await scan.then((data:any) => data);
-  processData(result)
-});
+export const getInspectorOutput = async () => {
+    for (const ipRange of getIPAddresses()) {
+        console.log(`SCANNING IP RANGE ${ipRange}`)
+        const result = await scanIpRange(ipRange).then((data: any) => processData(data));
+        console.log(result)
+        return result
+    }
+}
+

@@ -19,7 +19,7 @@ export const printDNSResults = (data: NmapResult[]) => {
         .forEach(entry => getDnsNames(entry.hostname))
 }
 export const getNamespace = (hostname: string|null) => hostname ? hostname.split('.')[2] : undefined;
-export const getService = (hostname: string|null) => hostname ? hostname.split('.')[1] : undefined
+export const getService = (hostname: string|null) => hostname ? hostname.split('.')[1] : undefined;
 export const getServicesRunningOnNamespaces = (data: Array<NmapResult>) => data.reduce((acc:any,current) => {
         const service = getService(current.hostname)
         const namespace:string |undefined = getNamespace(current.hostname);
