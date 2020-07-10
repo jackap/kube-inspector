@@ -9,7 +9,8 @@ import {results} from "./fixtures/nmap-results";
 
 describe('Inspect endpoint', () => {
     it('returns correct data', async () => {
-        const expectedBody = {
+        const expectedBody = [{
+            ipRange: 'fooo',
             namespaces: [ null, 'kube-system', 'istio-system', 'default' ],
             services: {
                 'kube-system': [ 'kube-dns', 'kube-dns' ],
@@ -31,7 +32,7 @@ describe('Inspect endpoint', () => {
                     'productpage'
                 ]
             }
-        };
+        }];
         const scanIpRangeStub  = scanIpRange as jest.Mock<Promise<NmapResult[]>>;
         const getIpAddressStub  = getIPAddresses as jest.Mock<String[]>;
 
