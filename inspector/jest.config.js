@@ -3,7 +3,7 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleFileExtensions: ['ts', 'tsx', 'json', 'node','js'],
   moduleNameMapper: {
     // This allows importing modules from the tests/ folder using an absolute path
     '^tests/(.*)$': '<rootDir>/tests/$1',
@@ -11,7 +11,7 @@ module.exports = {
     '^app/(.*)$': '<rootDir>/src/$1',
   },
   modulePaths: ['<rootDir>/src'],
-  testRegex: '/tests/.*(test|spec)\\.(ts|js)x?$',
+  testRegex: '/tests/.*(test|spec)\\.(ts)x?$',
   coverageDirectory: 'coverage',
-  collectCoverageFrom: ['src/**/*.{ts,tsx,js,jsx}', '!src/**/*.d.ts'],
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts'],
 };
