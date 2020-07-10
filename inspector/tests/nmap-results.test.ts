@@ -1,6 +1,6 @@
-import {getNamespace, getService, getServicesRunningOnNamespaces} from "../extractors";
+import {getNamespace, getService, getServicesRunningOnNamespaces} from "../src/extractors";
 import { expect } from "chai";
-import {NmapResult} from "../interfaces";
+import {NmapResult} from "../src/interfaces";
 
 
 describe("Nmap positve results", () => {

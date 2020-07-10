@@ -1,4 +1,4 @@
-import {NmapResult} from "../../interfaces";
+import {NmapResult} from "../../src/interfaces";
 
 export const results: Array<NmapResult>= [
     {hostname: null,
