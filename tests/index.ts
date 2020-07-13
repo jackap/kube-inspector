@@ -1,21 +1,9 @@
 import {getDockerCredentialsFromMinikube, getDockerEnv, setupMinikube} from "./minikube";
+import {applyInspector, buildInspector} from "./inspector";
 const Docker = require('dockerode');
-const path = require('path');
 const K8s = require('k8s');
 
-async function buildInspector(docker) {
-    let dockerStream: NodeJS.ReadableStream = await docker.buildImage({
-        context: path.resolve(__dirname, '..'),
-    }, {t: 'inspector:1.0.0'});
 
-    return new Promise((resolve, reject) => {
-        docker.modem.followProgress(dockerStream, (err, res) => err ? reject(err) : resolve(res), (evt) => console.log(evt));
-    });
-}
-async function applyInspector(kubectl) {
-
-    return await kubectl.deployment.create('../deployments/inspector.yaml')
-}
 async function main(){
    // const env = await setupMinikube().then(getDockerEnv)
     const env = await getDockerEnv();
