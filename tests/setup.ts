@@ -29,7 +29,7 @@ export async function setupTests(){
         env = await getDockerEnv();
     }
     catch (err) {
-        console.error(err);
+        console.info(err);
         env = await setupMinikube().then(getDockerEnv);
     }
     const credentials = getDockerCredentialsFromMinikube(env);
