@@ -30,7 +30,7 @@ function installManifest(){
 
 export async function installIstio(kubectl,namespace='default'){
     if (namespace !== 'default'){
-        await kubectl.createNamespace(namespace)
+        await kubectl.command(`create namespace ${namespace}` )
     }
 
     await installManifest()
