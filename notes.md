@@ -125,15 +125,15 @@ it as a non-root container
 
 ## Jul 03 
 Refactor the codebase and move around stuff.
-Fix deployments of the docker image and make running the tests easier
+Fix deployments of the docker image and make running the tests easier :green_circle:
 ######TODO: Update documentation to include the download of calico
  
 ## Jul 06
 After the meeting with Tuomas, there are some things to improve in the service: 
-* Use web based api 
+* Use web based api :green_circle:
 * Add logging to a logfile with the following capabilities:
     - json structured log-file.
-    - json structured output from web-service
+    - json structured output from web-service :green_circle:
 * Aim should be ``reporting connectivity`` or problems 
 on access within pods.
 * Testing the system with **helm**
