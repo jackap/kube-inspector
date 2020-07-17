@@ -1,5 +1,5 @@
 {
-  "name": "inspector",
+  "name": "inspect0r",
   "description": "Test your kubernetes infrastructure",
   "repository": "https://github.com/jackap/kubesec",
   "main": "src/index.ts",
