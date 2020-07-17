@@ -11,5 +11,6 @@ export async function buildInspector(docker) {
 }
 export async function applyInspector(kubectl) {
 
-    return await kubectl.deployment.create('../deployments/inspector.yaml')
+    await kubectl.deployment.create('../deployments/inspector.yaml');
+    await kubectl.service.create('../services/inspector.yaml');
 }

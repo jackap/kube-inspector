@@ -1,4 +1,4 @@
-import {getDockerCredentialsFromMinikube, getDockerEnv, setupMinikube} from "./minikube";
+import {getDockerCredentialsFromMinikube, getDockerEnv, getServiceUrl, setupMinikube} from "./minikube";
 import {applyInspector, buildInspector} from "./inspector";
 import {installIstio} from "./istio";
 import {installCalico} from "./calico";
@@ -6,7 +6,7 @@ const Docker = require('dockerode');
 const K8s = require('k8s');
 
 
-async function main(){
+async function setupTests(){
     const env = await setupMinikube().then(getDockerEnv);
     //const env = await getDockerEnv();
     const credentials = getDockerCredentialsFromMinikube(env);
@@ -20,9 +20,13 @@ async function main(){
         binary: '/usr/local/bin/kubectl'
         ,version: '/api/v1'
     });
-    await applyInspector(kubectl);
+    await applyInspector(kubectl).catch((e) => console.log(e));
     await installIstio(kubectl).catch((e) => (console.log(e)));
     await installCalico(kubectl).catch((e) => (console.log(e)));
+
+    const inspectorUrl = await getServiceUrl('inspector-service');
+    console.log('Inspector url is: ',inspectorUrl)
+    return {inspectorUrl,kubectl};
 }
 
-main().then(r => console.log(r));
+setupTests().then(r => console.log(r));

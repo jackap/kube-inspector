@@ -92,3 +92,22 @@ export function getDockerCredentialsFromMinikube(result) {
         cert: fs.readFileSync(path +'/cert.pem'),
         key: fs.readFileSync(path + '/key.pem')}
 }
+
+export function getServiceUrl(serviceName: string) {
+    return new Promise(
+        (resolve, reject) => {
+            const out = child_process.spawnSync('minikube', [
+                'service', serviceName,
+                '--url'
+            ]);
+            if (out.status !== 0) {
+                console.error('status: ' + out.status);
+                console.error('stdout: ' + out.stdout.toString('utf8'));
+                reject(new Error('Could not get docker environment'))
+            }
+            resolve(out.stdout.toString('utf8'));
+
+
+        }
+    );
+}
