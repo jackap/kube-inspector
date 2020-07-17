@@ -5,6 +5,6 @@ import {getInspectorOutput} from "./inspector";
 export const registerInspectEndpoint = (app: express.Application) => {
     app.get('/inspect', async (_req: express.Request,res: express.Response) => {
         const data = await getInspectorOutput();
-        res.status(200).send(data);
+        res.status(200).json(data);
     });
 };

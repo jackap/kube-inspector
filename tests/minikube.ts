@@ -93,7 +93,7 @@ export function getDockerCredentialsFromMinikube(result) {
         key: fs.readFileSync(path + '/key.pem')}
 }
 
-export function getServiceUrl(serviceName: string) {
+export function getServiceUrl(serviceName: string): Promise<string> {
     return new Promise(
         (resolve, reject) => {
             const out = child_process.spawnSync('minikube', [
