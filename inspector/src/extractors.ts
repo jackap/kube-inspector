@@ -26,6 +26,6 @@ export const getServicesRunningOnNamespaces = (data: Array<NmapResult>) => data.
         if (!namespace || namespace == null) return acc;
         return {
             ...acc,
-            [namespace]: acc[namespace] ? acc[namespace].concat(service) : [service]
+            [namespace]: acc[namespace] ? acc[namespace].concat(service).sort() : [service]
         }
-    },{})
+    },{});

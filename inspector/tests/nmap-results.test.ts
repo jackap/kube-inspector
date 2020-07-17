@@ -28,7 +28,7 @@ describe("Nmap positve results", () => {
     it("Groups services by namespace",() =>{
         expect(getServicesRunningOnNamespaces(nmapResults)).eql
         ({
-            'kube-system':['foo','bar']
+            'kube-system':['bar','foo']
         }
         )
     });

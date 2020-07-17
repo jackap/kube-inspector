@@ -11,26 +11,25 @@ describe('Inspect endpoint', () => {
     it('returns correct data', async () => {
         const expectedBody = [{
             ipRange: 'fooo',
-            namespaces: [ null, 'kube-system', 'istio-system', 'default' ],
+            namespaces: [ 'default', 'istio-system', 'kube-system', null ],
             services: {
-                'kube-system': [ 'kube-dns', 'kube-dns' ],
-                'istio-system': [
-                    'istiod',
-                    'istio-ingressgateway',
-                    'istio-egressgateway',
-                    'zipkin',
-                    'grafana',
-                    'kiali',
-                    'prometheus'
-                ],
-                default: [ // TODO: this should return a set
+                'default': [ // TODO: this should return a set
                     'details',
+                    'productpage',
                     'ratings',
                     'reviews',
                     'reviews',
-                    'reviews',
-                    'productpage'
-                ]
+                    'reviews'
+                ],
+                'kube-system': [ 'kube-dns', 'kube-dns' ],
+                'istio-system': [
+                    'grafana',
+                    'istio-egressgateway',
+                    'istio-ingressgateway',
+                    'istiod',
+                    'kiali',
+                    'prometheus',
+                    'zipkin']
             }
         }];
         const scanIpRangeStub  = scanIpRange as jest.Mock<Promise<NmapResult[]>>;

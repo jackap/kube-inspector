@@ -10,7 +10,7 @@ const Docker = require('dockerode');
 const getNamespaces  = (data: NmapResult[]): (string | undefined)[] => Array.from(new Set(data.map((entry: NmapResult) => getNamespace(entry.hostname))));
 export function processData(data: NmapResult[]) :any{
     const retval = {
-      namespaces: getNamespaces(data),
+      namespaces: getNamespaces(data).sort(),
       services: getServicesRunningOnNamespaces(data),
     }
  /* pprint(
