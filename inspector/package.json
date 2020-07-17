@@ -1,6 +1,7 @@
 {
   "name": "inspector",
   "description": "Test your kubernetes infrastructure",
+  "repository": "https://github.com/jackap/kubesec",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
