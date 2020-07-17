@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Kubernetes cluster tests case with istio enabled 1`] = `
+Array [
+  Object {
+    "ipRange": "10.88.0.4/24",
+    "namespaces": Array [
+      null,
+      "kube-system",
+      "istio-system",
+      "default",
+    ],
+    "services": Object {
+      "default": Array [
+        "ratings",
+        "details",
+        "reviews",
+        "reviews",
+        "reviews",
+        "productpage",
+      ],
+      "istio-system": Array [
+        "istiod",
+        "jaeger-collector-headless",
+        "grafana",
+        "kiali",
+        "istio-ingressgateway",
+        "istio-egressgateway",
+        "prometheus",
+      ],
+      "kube-system": Array [
+        "kube-dns",
+        "kube-dns",
+      ],
+    },
+  },
+]
+`;

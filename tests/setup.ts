@@ -24,6 +24,6 @@ export async function setupTests(){
     await installCalico(kubectl).catch((e) => (console.log(e)));
 
     const inspectorUrl = await getServiceUrl('inspector-service');
-    console.log('Inspector url is: ',inspectorUrl.trim())
+    console.info('Inspector url is: ',inspectorUrl.trim())
     return {inspectorUrl: inspectorUrl.trim(),kubectl};
 }

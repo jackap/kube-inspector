@@ -13,11 +13,11 @@ export async function buildInspector(docker) {
     }, {t: 'inspector:1.0.0'});
 
     return new Promise((resolve, reject) => {
-        docker.modem.followProgress(dockerStream, (err, res) => err ? reject(err) : resolve(res), (evt) => console.log(evt.stream));
+        docker.modem.followProgress(dockerStream, (err, res) => err ? reject(err) : resolve(res), (evt) => console.info(evt.stream));
     });
 }
 export async function applyInspector(kubectl) {
 
-    await kubectl.deployment.create('../deployments/inspector.yaml');
-    await kubectl.service.create('../services/inspector.yaml');
+    return await kubectl.deployment.create('../deployments/inspector.yaml').then(
+    kubectl.service.create('../services/inspector.yaml'));
 }
