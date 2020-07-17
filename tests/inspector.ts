@@ -5,16 +5,15 @@ export const INSPECT_ENDPOINT = '/inspect';
 
 export async function inspect(inspectorUrl){
     const res =  await fetch(inspectorUrl+INSPECT_ENDPOINT);
-    const inspectorResponse = await res.json();
-    return inspectorResponse;
+   return await res.json();
 }
 export async function buildInspector(docker) {
-    let dockerStream: NodeJS.ReadableStream = await docker.buildImage({
+    const dockerStream: NodeJS.ReadableStream = await docker.buildImage({
         context: path.resolve(__dirname, '..'),
     }, {t: 'inspector:1.0.0'});
 
     return new Promise((resolve, reject) => {
-        docker.modem.followProgress(dockerStream, (err, res) => err ? reject(err) : resolve(res), (evt) => console.info(evt.stream));
+        docker.modem.followProgress(dockerStream, (err, res) => err ? reject(err) : resolve(res), (evt) => console.info(evt.stream ?? evt));
     });
 }
 export async function applyInspector(kubectl) {
