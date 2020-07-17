@@ -9,7 +9,7 @@ export async function setupTests(){
     const env = await setupMinikube().then(getDockerEnv);
     //const env = await getDockerEnv();
     const credentials = getDockerCredentialsFromMinikube(env);
-    console.log('Logging into docker with:',credentials);
+    console.info('Logging into docker using IP ',credentials.host);
     const docker = new Docker({
         ...credentials
     });

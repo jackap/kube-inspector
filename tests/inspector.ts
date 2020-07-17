@@ -1,4 +1,5 @@
 import path from "path";
+const fetch = require('node-fetch');
 
 export const INSPECT_ENDPOINT = '/inspect';
 

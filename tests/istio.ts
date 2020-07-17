@@ -5,6 +5,7 @@ const child_process = require('child_process');
 
 function installManifest(){
     return new Promise(function(resolve,reject ){
+      // TODO: fetch istio version from env file
         const out = child_process.spawnSync('./istio-1.6.0/bin/istioctl', [
             'manifest',
             'apply',

@@ -4,3 +4,10 @@ export async function installCalico(kubectl){
 
 
 }
+
+export async function applyDenyToDefaultNamespace(kubectl){
+
+await kubectl.command('apply -f default-deny-single-namespace.yaml');
+
+
+}
