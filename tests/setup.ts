@@ -24,14 +24,9 @@ export const waitUntilAllPodsAreRunning = async (kubectl) => {
 }
 
 export async function setupTests(){
-    let env;
-    try {
-        env = await getDockerEnv();
-    }
-    catch (err) {
-        console.info(err);
-        env = await setupMinikube().then(getDockerEnv);
-    }
+    
+    const env = await setupMinikube().then(getDockerEnv);
+    // const env = await getDockerEnv();
     const credentials = getDockerCredentialsFromMinikube(env);
     console.info('Logging into docker using IP ',credentials.host);
     const docker = new Docker({
