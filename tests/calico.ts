@@ -11,3 +11,10 @@ await kubectl.command('apply -f default-deny-single-namespace.yaml');
 
 
 }
+
+export async function applyDenyToTestNamespace(kubectl){
+
+    await kubectl.command('apply -f default-deny-single-namespace.yaml');
+
+
+}
