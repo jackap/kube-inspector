@@ -1,11 +1,18 @@
 import path from "path";
 const fetch = require('node-fetch');
+const retry = require('async-retry');
 
 export const INSPECT_ENDPOINT = '/inspect';
 
 export async function inspect(inspectorUrl){
-    const res =  await fetch(inspectorUrl+INSPECT_ENDPOINT);
-   return await res.json();
+    return await retry(async bail => {
+        // if anything throws, we retry
+        const res = await fetch(inspectorUrl+INSPECT_ENDPOINT)
+        const data = await res.json();
+        return data;
+    }, {
+        retries: 10
+    });
 }
 export async function buildInspector(docker) {
     const dockerStream: NodeJS.ReadableStream = await docker.buildImage({
