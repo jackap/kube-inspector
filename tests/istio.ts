@@ -38,4 +38,13 @@ export async function installIstio(kubectl,namespace='default'){
         await kubectl.command(`apply -f ./istio-1.6.0/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`)
 }
 
+export async function deleteIstio(kubectl,namespace='default'){
 
+
+    await kubectl.command(`delete -f ./istio-1.6.0/samples/bookinfo/platform/kube/bookinfo.yaml -n ${namespace}`);
+    await kubectl.command(`delete -f ./istio-1.6.0/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`);
+
+    if (namespace !== 'default'){
+        await kubectl.command(`delete namespace ${namespace}` )
+    }
+}
