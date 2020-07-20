@@ -3,16 +3,23 @@ import {deleteInspector, inspect} from "./inspector";
 import {applyDenyToDefaultNamespace, applyDenyToTestNamespace} from "./calico";
 import {installIstio} from "./istio";
 
+const verifyNoActivePods = async (kubectl) => {
+    const pods = await kubectl.pod.list();
+    console.log(pods.items[0]);
+    expect(pods.items.length).toBe(0)
+};
+
 describe('Test mechanism works', () => {
-    let inspectorUrl, kubectl;
+    let kubectl;
     beforeAll(async () => {
         jest.setTimeout(60 * 15 * 1000); // 15 minutes
         (kubectl = await setupTests());
     });
 
+    afterEach( async () => {
+        await verifyNoActivePods(kubectl)
+    });
     it('There are no active pods when starting the tests', async () => {
-        const pods = await kubectl.pod.list();
-        expect(pods.items.length).toBe(0)
     });
 
     it('There are no active pods when installing and deleting a service', async () => {
@@ -22,9 +29,6 @@ describe('Test mechanism works', () => {
         await deleteInspector(kubectl);
         await waitPodsWithStatus(kubectl, 'Terminating');
 
-        const pods = await kubectl.pod.list();
-        console.log(pods.items[0]);
-        expect(pods.items.length).toBe(0)
     });
 });
 
