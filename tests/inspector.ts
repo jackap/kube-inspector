@@ -21,3 +21,8 @@ export async function applyInspector(kubectl) {
     return await kubectl.deployment.create('../deployments/inspector.yaml').then(
     kubectl.service.create('../services/inspector.yaml'));
 }
+
+export async function deleteInspector(kubectl) {
+
+    return await kubectl.command('delete -f ../services/inspector.yaml').then(kubectl.command('delete -f ../deployments/inspector.yaml'));
+}
