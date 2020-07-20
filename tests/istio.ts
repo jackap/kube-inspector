@@ -3,7 +3,7 @@
 const child_process = require('child_process');
 
 
-function installManifest(){
+export async function installIstioManifest(){
     return new Promise(function(resolve,reject ){
       // TODO: fetch istio version from env file
         const out = child_process.spawnSync('./istio-1.6.0/bin/istioctl', [
@@ -33,10 +33,9 @@ export async function installIstio(kubectl,namespace='default'){
         await kubectl.command(`create namespace ${namespace}` )
     }
 
-    await installManifest()
-        .then(kubectl.command(`label namespace ${namespace} istio-injection=enabled --overwrite`))
-        .then(kubectl.command(`apply -f ./istio-1.6.0/samples/bookinfo/platform/kube/bookinfo.yaml -n ${namespace}`))
-        .then(kubectl.command(`apply -f ./istio-1.6.0/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`))
+        await kubectl.command(`label namespace ${namespace} istio-injection=enabled --overwrite`)
+        await kubectl.command(`apply -f ./istio-1.6.0/samples/bookinfo/platform/kube/bookinfo.yaml -n ${namespace}`)
+        await kubectl.command(`apply -f ./istio-1.6.0/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`)
 }
 
 
