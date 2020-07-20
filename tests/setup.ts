@@ -22,7 +22,7 @@ export const waitPodsWithStatus = async (kubectl,status='Running') => {
         someAreNotRunning = await statusHandler(kubectl,status);
         if (someAreNotRunning) {
             console.info(`Not all pods have state ${status}!`);
-            await timeout(2000);
+            await timeout(5000);
         }
     }
     return
@@ -49,7 +49,6 @@ export async function setupTests(){
         });
         await buildInspector(docker);
         await installIstioManifest();
-        await installCalico(kubectl).catch((e) => (console.log(e)));
     }
 
     await waitPodsWithStatus(kubectl);
@@ -60,5 +59,5 @@ export async function installInspector(kubectl){
     await applyInspector(kubectl).catch((e) => console.log(e));
     const inspectorUrl = await getServiceUrl('inspector-service');
     console.info('Inspector url is: ',inspectorUrl.trim())
-    return inspectorUrl
+    return inspectorUrl.trim();
 }
