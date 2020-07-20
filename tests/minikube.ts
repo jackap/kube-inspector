@@ -63,8 +63,6 @@ export function getDockerEnv() {
         console.error('sterr: ' + out.stderr.toString('utf8'));
       }
       if (out.status !== 0) {
-        console.error('status: ' + out.status);
-        console.error('stdout: ' + out.stdout.toString('utf8'));
         reject(new Error('Could not get docker environment'))
       }
       console.info(out.stdout.toString('utf8'));
