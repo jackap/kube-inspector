@@ -22,7 +22,9 @@ function createNewCluster(){
     const out = child_process.spawnSync('minikube', [
         'start', '--vm-driver=hyperkit',
         '--network-plugin=cni',
-        '--extra-config=kubelet.network-plugin=cni'
+        '--extra-config=kubelet.network-plugin=cni',
+        '--cpus=4',
+        '--memory=8192'
     ]);
 
    return handleMinikubeOutput(out);
