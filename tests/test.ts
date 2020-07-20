@@ -1,9 +1,34 @@
-import {setupTests, waitUntilAllPodsAreRunning} from "./setup";
-import {inspect} from "./inspector";
-import {applyDenyToDefaultNamespace, applyDenyToTestNamespace, installCalico} from "./calico";
+import {installInspector, setupTests, waitPodsWithStatus} from "./setup";
+import {deleteInspector, inspect} from "./inspector";
+import {applyDenyToDefaultNamespace, applyDenyToTestNamespace} from "./calico";
 import {installIstio} from "./istio";
 
-describe('Kubernetes cluster tests', () =>
+describe('Test mechanism works', () => {
+    let inspectorUrl, kubectl;
+    beforeAll(async () => {
+        jest.setTimeout(60 * 15 * 1000); // 15 minutes
+        (kubectl = await setupTests());
+    });
+
+    it('There are no active pods when starting the tests', async () => {
+        const pods = await kubectl.pod.list();
+        expect(pods.items.length).toBe(0)
+    });
+
+    it('There are no active pods when installing and deleting a service', async () => {
+
+        await installInspector(kubectl);
+        await waitPodsWithStatus(kubectl);
+        await deleteInspector(kubectl);
+        await waitPodsWithStatus(kubectl, 'Terminating');
+
+        const pods = await kubectl.pod.list();
+        console.log(pods.items[0]);
+        expect(pods.items.length).toBe(0)
+    });
+});
+
+describe.skip('Kubernetes cluster tests', () =>
 {
    let inspectorUrl,kubectl;
     beforeAll(async () => {
@@ -19,7 +44,7 @@ describe('Kubernetes cluster tests', () =>
 
     it('case with istio enabled in two namespaces',async () => {
         await installIstio(kubectl,'test-namespace').catch((e) => (console.log(e)));
-        await waitUntilAllPodsAreRunning(kubectl);
+        await waitPodsWithStatus(kubectl);
         const inspectorResponse = await inspect(inspectorUrl);
         expect(inspectorResponse).toMatchSnapshot();
     });
