@@ -1,6 +1,9 @@
 import {installInspector, setupTests, waitPodsWithStatus} from "./setup";
 import {deleteInspector, inspect} from "./inspector";
-import {applyDenyToDefaultNamespace, applyDenyToTestNamespace, installCalico} from "./calico";
+import {
+    installCalico,
+    deleteCalico,
+} from "./calico";
 import {deleteIstio, installIstio} from "./istio";
 
 const verifyNoActivePods = async (kubectl) => {
@@ -34,7 +37,7 @@ describe('Test mechanism works', () => {
 describe('Kubernetes cluster tests with istio', () => {
     let kubectl;
     beforeAll(async () => {
-        jest.setTimeout(60 * 15 * 1000); // 15 minutes
+        jest.setTimeout(60 * 15 * 100000); // 15 minutes
         (kubectl = await setupTests());
     });
 
@@ -100,7 +103,7 @@ describe('Kubernetes cluster tests with istio', () => {
 describe('Kubernetes cluster tests with istio and calico', () =>{
     let kubectl;
     beforeAll(async () => {
-        jest.setTimeout(60 * 15 * 1000); // 15 minutes
+        jest.setTimeout(60 * 15 * 100000); // 15 minutes
         (kubectl = await setupTests());
         await installCalico(kubectl);
     });
@@ -108,17 +111,59 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
     afterEach(async () => {
         await verifyNoActivePods(kubectl)
     });
-    it.skip('case with calico rules enabled for default namespace',async () => {
+    afterAll(async () => await deleteCalico(kubectl));
 
-        await applyDenyToDefaultNamespace(kubectl);
-        const inspectorResponse = await inspect('');
-        expect(inspectorResponse).toMatchSnapshot();
+    it('Istio bookinfo example on single namespace and calico', async () => {
+
+        await installIstio(kubectl);
+        const inspectorUrl = await installInspector(kubectl);
+        await waitPodsWithStatus(kubectl);
+        let inspectorResponse;
+        try {
+            inspectorResponse = await inspect(inspectorUrl);
+            expect(inspectorResponse.length).toBe(1);
+            expect(inspectorResponse[0].services.default).toMatchSnapshot();
+            expect(inspectorResponse[0].services['test-namespace']).toBeUndefined();
+            expect(inspectorResponse[0].namespaces).toMatchObject(
+                ['default',
+                    'istio-system',
+                    'kube-system',
+                    null]);
+        } finally {
+            await deleteInspector(kubectl);
+            await deleteIstio(kubectl);
+            await waitPodsWithStatus(kubectl, 'Terminating');
+        }
+
     });
 
-    it.skip('case with calico rules enabled for all namespaces',async () => {
+    it('Istio bookinfo example on multiple namespaces', async () => {
 
-        await applyDenyToTestNamespace(kubectl);
-        const inspectorResponse = await inspect('');
-        expect(inspectorResponse).toMatchSnapshot();
-    })
+
+        try {
+            await installIstio(kubectl);
+            await installIstio(kubectl, 'test-namespace');
+            const inspectorUrl = await installInspector(kubectl);
+            await waitPodsWithStatus(kubectl);
+            let inspectorResponse;
+            inspectorResponse = await inspect(inspectorUrl);
+            expect(inspectorResponse.length).toBe(1);
+            expect(inspectorResponse[0].services.default).toMatchSnapshot();
+            expect(inspectorResponse[0].services['test-namespace']).not.toBeUndefined();
+            expect(inspectorResponse[0].services['test-namespace']).toMatchSnapshot();
+
+            expect(inspectorResponse[0].namespaces).toMatchObject(
+                ['default',
+                    'test-namespace',
+                    null]);
+        } finally {
+            await deleteIstio(kubectl);
+            await deleteIstio(kubectl, 'test-namespace');
+            await deleteInspector(kubectl);
+            await waitPodsWithStatus(kubectl, 'Terminating');
+        }
+
+    });
+
+
 });
