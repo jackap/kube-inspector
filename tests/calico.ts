@@ -13,15 +13,17 @@ export async function deleteCalico(kubectl){
 }
 
 export async function applyDenyToDefaultNamespace(kubectl){
-
 await kubectl.command('apply -f default-deny-single-namespace.yaml');
-
-
 }
 
-export async function applyDenyToTestNamespace(kubectl){
+export async function applyDenyToAllNamespaces(kubectl){
+    await kubectl.command('apply -f default-deny.yaml');
+}
 
-    await kubectl.command('apply -f default-deny-single-namespace.yaml');
+export async function deleteDenyToDefaultNamespace(kubectl){
+    await kubectl.command('delete -f default-deny-single-namespace.yaml');
+}
 
-
+export async function deleteDenyToAllNamespaces(kubectl){
+    await kubectl.command('delete -f default-deny.yaml');
 }
