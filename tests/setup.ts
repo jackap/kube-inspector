@@ -7,10 +7,14 @@ const K8s = require('k8s');
 const statusHandler = async (kubectl,status) => {
     const pods = await kubectl.pod.list();
     const statuses = pods.items.map((item) => item.status.phase);
-     return !statuses.every((curr_status: string) => {
+    const podsWithDifferentStatus = pods.items
+        .filter( (pod) => pod.status.phase !== status)
+        .map((pod) => pod.metadata.name);
+     const someAreNotRunning = !statuses.every((curr_status: string) => {
          return curr_status === status
 
      });
+     return {someAreNotRunning,podsWithDifferentStatus}
 };
 function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -18,9 +22,10 @@ function timeout(ms) {
 export const waitPodsWithStatus = async (kubectl,status='Running') => {
     let someAreNotRunning = true;
     while (someAreNotRunning) {
-        someAreNotRunning = await statusHandler(kubectl,status);
+        const retval  = await statusHandler(kubectl,status);
+        someAreNotRunning = retval.someAreNotRunning;
         if (someAreNotRunning) {
-            console.info(`Not all pods have state ${status}!`);
+            console.info(`Not all pods have state ${status}!`,retval.podsWithDifferentStatus);
             await timeout(3000);
         }
     }
