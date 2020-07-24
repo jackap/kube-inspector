@@ -36,9 +36,9 @@ docker.listImages(function (err: any, containers : [any]) {
 export const getInspectorOutput = async () => {
     let retval: any[] = [];
     for (const ipRange of getIPAddresses()) {
-        console.log(`SCANNING IP RANGE ${ipRange}`)
+        console.log(`SCANNING IP RANGE ${ipRange}`);
         const result = await scanIpRange(ipRange).then((data: any) => processData(data));
-        console.log(result)
+        console.log(result);
         retval = [...retval,{ipRange: ipRange,...result}]
     }
     return retval
