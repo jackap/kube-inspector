@@ -41,7 +41,6 @@ export async function installIstio(kubectl,namespace='default'){
         await kubectl.command(`label namespace ${namespace} istio-injection=enabled --overwrite`)
         await kubectl.command(`apply -f ./istio-1.6.0/samples/bookinfo/platform/kube/bookinfo.yaml -n ${namespace}`)
         await kubectl.command(`apply -f ./istio-1.6.0/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`)
-    console.log('Done!')
 }
 
 export async function deleteIstio(kubectl,namespace='default'){

@@ -27,7 +27,6 @@ function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 export const waitPodsWithStatus = async (kubectl,status='Running') => {
-    console.log("WAITING PODS WITH STATUS")
     let someAreNotRunning = true;
     let miss_count = 0;
     while (someAreNotRunning) {
@@ -35,30 +34,24 @@ export const waitPodsWithStatus = async (kubectl,status='Running') => {
         const retval  = await statusHandler(kubectl,status);
         someAreNotRunning = retval.someAreNotRunning;
         if (someAreNotRunning) {
-            console.info(`Not all pods have state ${status}!`,retval.podsWithDifferentStatus);
-            if (miss_count % 5 === 0){
+            if (miss_count % 10 === 0)
+                console.info(`Not all pods have state ${status}!`,retval.podsWithDifferentStatus);
+            if (miss_count % 15 === 0){
                 const out  = child_process.spawnSync('kubectl',['describe', 'pods']);
                 console.error(out.stdout.toString());
             }
             await timeout(3000);
         }
     }
-    console.log("ALL PODS WITH DESIRED STATUS")
     return
 }
 
 export async function setupTests(){
-    let env;
     const kubectl = K8s.kubectl({
         binary: 'kubectl'
         ,version: '/api/v1'
     });
-    try {
-        env = await getDockerEnv();
-        const credentials = getDockerCredentialsFromMinikube(env);
-        console.info('Logging into docker using IP ',credentials.host);
-    }
-    catch (e) {
+
         console.info('Starting minikube from scratch');
         await setupMinikube()//.then(getDockerEnv);
         //const credentials = getDockerCredentialsFromMinikube(env);
@@ -73,10 +66,8 @@ export async function setupTests(){
         exec(commands.join(' && '), (error,stdout,stderr) => {
             console.log(error);console.log(stdout);console.log(stderr);
         })
-        console.log("BUILT INSPECTOR")
         // await buildInspector(docker);
         await installIstioManifest();
-    }
 
     await waitPodsWithStatus(kubectl);
     return kubectl;
