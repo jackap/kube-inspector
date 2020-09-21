@@ -36,8 +36,8 @@ export const waitPodsWithStatus = async (kubectl,status='Running') => {
         if (someAreNotRunning) {
             console.info(`Not all pods have state ${status}!`,retval.podsWithDifferentStatus);
             if (miss_count % 5 === 0){
-                const out  = child_process.spawnSync('kubectl describe pods');
-                console.error(JSON.stringify(out));
+                const out  = child_process.spawnSync('kubectl',['describe', 'pods']);
+                console.error(out.stdout.toString());
             }
             await timeout(3000);
         }

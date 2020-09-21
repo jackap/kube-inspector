@@ -33,7 +33,8 @@ jobs:
         pushd tests
         curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.0 sh -
         curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
-        ls -la
+        ls -la  istio-1.6.0
+        kubectl version --client=true
         source ~/.nvm/nvm.sh
         nvm install
         npm install
