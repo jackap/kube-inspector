@@ -40,7 +40,7 @@ export const waitPodsWithStatus = async (kubectl,status='Running') => {
 export async function setupTests(){
     let env;
     const kubectl = K8s.kubectl({
-        binary: 'kubectl'
+        binary: '/usr/bin/kubectl '
         ,version: '/api/v1'
     });
     try {
