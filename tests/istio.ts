@@ -16,7 +16,7 @@ export async function installIstioManifest(){
 
         if (out.status !== 0){
             console.error('status: ' + out.status);
-            console.error('stdout: ' + out.stdout.toString('utf8'));
+            console.error('stderr: ' + out.stderr.toString('utf8'));
             resolve({ // TODO: use proper reject schema here
                 one: out.stdout.toString('utf8'),
                 two: out.stderr.toString('utf8')
