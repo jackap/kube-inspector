@@ -26,6 +26,8 @@ describe('Test mechanism works', () => {
 
     afterEach( async () => {
         await verifyNoActivePods(kubectl)
+        exec('minikube stop && kubectl config use-context minikube')
+        await setupMinikube()
     });
     it('There are no active pods when starting the tests', async () => {
     });
@@ -49,6 +51,8 @@ describe('Kubernetes cluster tests with istio', () => {
 
     afterEach(async () => {
         await verifyNoActivePods(kubectl)
+        exec('minikube stop && kubectl config use-context minikube')
+        await setupMinikube()
     });
     it('Istio bookinfo example on single namespace', async () => {
 
