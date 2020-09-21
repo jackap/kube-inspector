@@ -110,7 +110,7 @@ export function getServiceUrl(serviceName: string): Promise<string> {
       ]);
       if (out.status !== 0) {
         console.error('status: ' + out.status);
-        console.error('stdout: ' + out.stdout.toString('utf8'));
+        console.error('stderr: ' + out.stderr.toString('utf8'));
         reject(new Error('Could not get docker environment'))
       }
       resolve(out.stdout.toString('utf8'));

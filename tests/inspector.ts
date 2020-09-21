@@ -20,7 +20,8 @@ export async function buildInspector(docker) {
     }, {t: 'inspector:1.0.0'});
 
     return new Promise((resolve, reject) => {
-        docker.modem.followProgress(dockerStream, (err, res) => err ? reject(err) : resolve(res), (evt) => console.info(evt.stream ?? evt));
+        console.info('Building inspector container...')
+        docker.modem.followProgress(dockerStream, (err, res) => err ? reject(err) : resolve(res));
     });
 }
 export async function applyInspector(kubectl) {

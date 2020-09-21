@@ -1,11 +1,7 @@
-FROM kalilinux/kali-rolling
-RUN apt-get update
-RUN apt-get install nodejs nmap  net-tools iputils-ping traceroute dnsutils curl npm rpcbind -y
+FROM jackops93/inspector_base:1.0.0
 
 COPY ./inspector/ ./inspector/
-ENTRYPOINT []
 WORKDIR ./inspector
-EXPOSE 8081
-RUN npm install
 RUN npm run build
+EXPOSE 8081
 CMD node src/main.js
