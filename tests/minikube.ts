@@ -93,7 +93,6 @@ export function getDockerCredentialsFromMinikube(result) {
   const [_, __, host, port] = variablesRegexes[DOCKER_HOST].exec(variables[DOCKER_HOST]);
   const [___,path] = variablesRegexes[DOCKER_CERT_PATH].exec(variables[DOCKER_CERT_PATH]);
   return {
-    protocol: 'https',
     host,
     port,
     ca: fs.readFileSync(path + '/ca.pem'),
