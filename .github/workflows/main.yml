@@ -27,5 +27,8 @@ jobs:
         source ~/.nvm/nvm.sh
         nvm install
         npm install
+        minikube start --vm-driver=docker --network-plugin=cni --extra-config=kubelet.network-plugin=cni
+        kubectl cluster-info
+        kubectl get pods -n kube-system
         npm run test
         
