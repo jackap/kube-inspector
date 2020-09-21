@@ -19,3 +19,37 @@ spec:
   policyTypes:
     - Ingress
     - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-traffic-from-inspector-on-default-namespace
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: inspector
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - {}
+  egress:
+    - {}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-traffic-from-inspector-on-test-namespace
+  namespace: test-namespace
+spec:
+  podSelector:
+    matchLabels:
+      app: inspector
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - {}
+  egress:
+    - {}

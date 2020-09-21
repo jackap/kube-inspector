@@ -20,11 +20,12 @@ function deleteExistingCluster(){
 
 function createNewCluster(){
     const out = child_process.spawnSync('minikube', [
-        'start', '--vm-driver=hyperkit',
+        'start',// '--vm-driver=hyperkit',
+       // '--memory=7000',
+        //'--cpus=4',
+       // '--disk-size=40g',
         '--network-plugin=cni',
         '--extra-config=kubelet.network-plugin=cni',
-        '--cpus=4',
-        '--memory=8192'
     ]);
 
    return handleMinikubeOutput(out);

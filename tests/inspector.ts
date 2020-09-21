@@ -7,7 +7,7 @@ export const INSPECT_ENDPOINT = '/inspect';
 export async function inspect(inspectorUrl){
     return await retry(async bail => {
         // if anything throws, we retry
-        const res = await fetch(inspectorUrl+INSPECT_ENDPOINT)
+        const res = await fetch(inspectorUrl+INSPECT_ENDPOINT, {timeout: 600*1000});
         const data = await res.json();
         return data;
     }, {
