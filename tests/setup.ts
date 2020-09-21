@@ -1,6 +1,7 @@
 import {getDockerCredentialsFromMinikube, getDockerEnv, getServiceUrl, setupMinikube} from "./minikube";
 import {applyInspector, buildInspector} from "./inspector";
 import {installIstioManifest} from "./istio";
+import * as child_process from "child_process";
 const Docker = require('dockerode');
 const K8s = require('k8s');
 
@@ -27,14 +28,21 @@ function timeout(ms) {
 export const waitPodsWithStatus = async (kubectl,status='Running') => {
     console.log("WAITING PODS WITH STATUS")
     let someAreNotRunning = true;
+    let miss_count = 0;
     while (someAreNotRunning) {
+        miss_count +=1;
         const retval  = await statusHandler(kubectl,status);
         someAreNotRunning = retval.someAreNotRunning;
         if (someAreNotRunning) {
             console.info(`Not all pods have state ${status}!`,retval.podsWithDifferentStatus);
+            if (miss_count % 5 === 0){
+                const out  = child_process.spawnSync('kubectl describe pods');
+                console.error(JSON.stringify(out));
+            }
             await timeout(3000);
         }
     }
+    console.log("ALL PODS WITH DESIRED STATUS")
     return
 }
 
@@ -66,7 +74,9 @@ export async function setupTests(){
 }
 
 export async function installInspector(kubectl){
-    await applyInspector(kubectl).catch((e) => console.log(e));
+    console.log('[InstallInspector]: Installing inspector')
+    await applyInspector(kubectl)
+    console.log('[InstallInspector]: Inspector applied')
     const inspectorUrl = await getServiceUrl('inspector-service');
     console.info('[InstallInspector]: Inspector url is: ',inspectorUrl.trim());
     return inspectorUrl.trim();

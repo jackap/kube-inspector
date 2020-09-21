@@ -25,9 +25,11 @@ export async function buildInspector(docker) {
     });
 }
 export async function applyInspector(kubectl) {
-
-    return await kubectl.deployment.create('../deployments/inspector.yaml').then(
-    kubectl.service.create('../services/inspector.yaml'));
+    console.log('[InstallInspector]: Applying inspector deployment')
+    await kubectl.command('apply -f ../deployments/inspector.yaml')
+    console.log('[InstallInspector]: Applying inspector service')
+    await kubectl.command('apply -f ../services/inspector.yaml');
+    return
 }
 
 export async function deleteInspector(kubectl) {
