@@ -28,7 +28,7 @@ describe('Test mechanism works', () => {
     it('There are no active pods when starting the tests', async () => {
     });
 
-    it('There are no active pods when installing and deleting a service', async () => {
+    xit('There are no active pods when installing and deleting a service', async () => {
 
         await installInspector(kubectl);
         await waitPodsWithStatus(kubectl);

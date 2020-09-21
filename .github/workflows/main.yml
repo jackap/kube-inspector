@@ -33,6 +33,7 @@ jobs:
         pushd tests
         curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.0 sh -
         curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
+        ls -la
         source ~/.nvm/nvm.sh
         nvm install
         npm install
@@ -41,6 +42,8 @@ jobs:
       with:
         minikube-version: 1.12.0
         k8s-version: 1.15.1
+    - uses: satackey/action-docker-layer-caching@v0.0.8
+      name: Docker  layer caching
     - name: Testing
       run: |
         cd tests

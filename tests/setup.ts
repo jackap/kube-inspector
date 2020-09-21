@@ -40,7 +40,7 @@ export const waitPodsWithStatus = async (kubectl,status='Running') => {
 export async function setupTests(){
     let env;
     const kubectl = K8s.kubectl({
-        binary: '/usr/bin/kubectl '
+        binary: 'kubectl'
         ,version: '/api/v1'
     });
     try {
@@ -56,7 +56,7 @@ export async function setupTests(){
         const docker = new Docker({
             ...credentials
         });
-        await buildInspector(docker);
+        //await buildInspector(docker);
         await installIstioManifest();
     }
 
