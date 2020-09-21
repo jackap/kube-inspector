@@ -14,13 +14,16 @@ export async function installIstioManifest(){
             'profile=demo'
         ]);
 
-        if (out.status !== 0){
+        if (out.status !== 0) {
             console.error('status: ' + out.status);
-            console.error('stderr: ' + out.stderr.toString('utf8'));
-            resolve({ // TODO: use proper reject schema here
-                one: out.stdout.toString('utf8'),
-                two: out.stderr.toString('utf8')
-            });
+            try {
+                console.error('stderr: ' + out.stderr.toString('utf8'));
+            }
+            catch (e){
+                console.error('Could not get the root cause')
+            }
+
+            resolve();
 
         }
         console.info(out.stdout.toString('utf8'));

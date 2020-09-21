@@ -25,7 +25,7 @@ function createNewCluster(){
         //'--cpus=4',
        // '--disk-size=40g',
         '--network-plugin=cni',
-        '--extra-config=kubelet.network-plugin=cni',
+        '--enable-default-cni',
     ]);
 
    return handleMinikubeOutput(out);

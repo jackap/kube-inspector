@@ -25,6 +25,7 @@ function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 export const waitPodsWithStatus = async (kubectl,status='Running') => {
+    console.log("WAITING PODS WITH STATUS")
     let someAreNotRunning = true;
     while (someAreNotRunning) {
         const retval  = await statusHandler(kubectl,status);
@@ -56,7 +57,7 @@ export async function setupTests(){
         const docker = new Docker({
             ...credentials
         });
-        //await buildInspector(docker);
+        await buildInspector(docker);
         await installIstioManifest();
     }
 
