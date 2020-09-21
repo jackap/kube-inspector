@@ -141,7 +141,7 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
 
     });
 
-    it('Istio bookinfo example on multiple namespaces', async () => {
+    it.skip('Istio bookinfo example on multiple namespaces', async () => {
 
 
         try {
@@ -169,7 +169,7 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
 
     });
 
-    it
+    it.skip
     ('Istio bookinfo example on single namespace and calico rules', async () => {
 
         await installIstio(kubectl);
@@ -192,7 +192,7 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
 
     },_10MINUTES);
 
-    it
+    it.skip
     ('Istio bookinfo example on multiple namespace', async () => {
 
 

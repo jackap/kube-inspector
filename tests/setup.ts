@@ -40,7 +40,7 @@ export const waitPodsWithStatus = async (kubectl,status='Running') => {
                 const out  = child_process.spawnSync('kubectl',['describe', 'pods']);
                 console.error(out.stdout.toString());
             }
-            await timeout(3000);
+            await timeout(6000);
         }
     }
     return

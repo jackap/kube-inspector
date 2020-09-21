@@ -21,6 +21,7 @@ export async function installIstioManifest(){
             }
             catch (e){
                 console.error('Could not get the root cause')
+                reject("I do not know!")
             }
 
             resolve();
