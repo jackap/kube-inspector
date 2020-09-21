@@ -100,10 +100,16 @@ describe('Kubernetes cluster tests with istio', () => {
                     'test-namespace',
                     null]);
         } finally {
-            await deleteIstio(kubectl);
-            await deleteIstio(kubectl, 'test-namespace');
-            await deleteInspector(kubectl);
-            await waitPodsWithStatus(kubectl, 'Terminating');
+            try {
+                await deleteIstio(kubectl);
+                await deleteIstio(kubectl, 'test-namespace');
+                await deleteInspector(kubectl);
+                await waitPodsWithStatus(kubectl, 'Terminating');
+            }
+            catch (e){
+                console.error("ANOMALY DETECTED DURING TEST")
+            }
+
         }
 
     });
