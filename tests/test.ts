@@ -38,7 +38,7 @@ describe('Test mechanism works', () => {
     });
 });
 
-describe.skip('Kubernetes cluster tests with istio', () => {
+describe('Kubernetes cluster tests with istio', () => {
     let kubectl;
     beforeAll(async () => {
         jest.setTimeout(60 * 20 * 1000); // 20 minutes
@@ -104,7 +104,7 @@ describe.skip('Kubernetes cluster tests with istio', () => {
 
 });
 
-describe.skip('Kubernetes cluster tests with istio and calico', () =>{
+describe('Kubernetes cluster tests with istio and calico', () =>{
     let kubectl;
     beforeAll(async () => {
         jest.setTimeout(60 * 20 * 1000); // 20 minutes
