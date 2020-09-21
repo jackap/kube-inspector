@@ -107,7 +107,7 @@ describe('Kubernetes cluster tests with istio', () => {
                 await waitPodsWithStatus(kubectl, 'Terminating');
             }
             catch (e){
-                console.error("ANOMALY DETECTED DURING TEST")
+                console.log("ANOMALY DETECTED DURING TEST")
             }
 
         }
