@@ -25,7 +25,5 @@ jobs:
         cd tests
         curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
         source ~/.nvm/nvm.sh
-        nvm install
-        npm install
-        npm run test
-        
+        which kubectl
+
