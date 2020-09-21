@@ -9,6 +9,8 @@ import {
     deleteDenyToAllNamespaces,
 } from "./calico";
 import {deleteIstio, installIstio} from "./istio";
+import {exec} from "child_process";
+import {setupMinikube} from "./minikube";
 
 const verifyNoActivePods = async (kubectl) => {
     const pods = await kubectl.pod.list();
@@ -114,6 +116,8 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
 
     afterEach(async () => {
         await verifyNoActivePods(kubectl)
+        exec('minikube stop && kubectl config use-context minikube')
+        await setupMinikube()
     });
     afterAll(async () => await deleteCalico(kubectl));
 
