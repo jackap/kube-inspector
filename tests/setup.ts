@@ -2,6 +2,7 @@ import {getDockerCredentialsFromMinikube, getDockerEnv, getServiceUrl, setupMini
 import {applyInspector, buildInspector} from "./inspector";
 import {installIstioManifest} from "./istio";
 import * as child_process from "child_process";
+import {exec} from "child_process";
 const Docker = require('dockerode');
 const K8s = require('k8s');
 
@@ -59,13 +60,20 @@ export async function setupTests(){
     }
     catch (e) {
         console.info('Starting minikube from scratch');
-        env = await setupMinikube().then(getDockerEnv);
-        const credentials = getDockerCredentialsFromMinikube(env);
-        console.info('Logging into docker using IP ',credentials.host);
-        const docker = new Docker({
-            ...credentials
-        });
-        await buildInspector(docker);
+        await setupMinikube()//.then(getDockerEnv);
+        //const credentials = getDockerCredentialsFromMinikube(env);
+        //console.info('Logging into docker using IP ',credentials.host);
+        //const docker = new Docker({
+        //    ...credentials
+       // });
+       const commands = [ 'eval $(minikube -p minikube docker-env)',
+           'docker build -t inspector:1.0.0 ..'
+
+        ]
+        exec(commands.join(' && '), (error,stdout,stderr) => {
+            console.log(error);console.log(stdout);console.log(stderr);
+        })
+        // await buildInspector(docker);
         await installIstioManifest();
     }
 
