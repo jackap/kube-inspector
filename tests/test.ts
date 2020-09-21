@@ -78,7 +78,7 @@ describe('Kubernetes cluster tests with istio', () => {
 
     });
 
-    it('Istio bookinfo example on multiple namespace', async () => {
+    it.skip('Istio bookinfo example on multiple namespace', async () => {
 
 
         try {
