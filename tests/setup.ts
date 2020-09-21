@@ -9,7 +9,12 @@ const statusHandler = async (kubectl,status) => {
     const statuses = pods.items.map((item) => item.status.phase);
     const podsWithDifferentStatus = pods.items
         .filter( (pod) => pod.status.phase !== status)
-        .map((pod) => pod.metadata.name);
+        .map((pod) =>
+        [
+            pod.metadata.name,
+            pod.status.phase
+        ]
+            );
      const someAreNotRunning = !statuses.every((curr_status: string) => {
          return curr_status === status
 
