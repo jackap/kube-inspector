@@ -66,13 +66,14 @@ export async function setupTests(){
         //const docker = new Docker({
         //    ...credentials
        // });
-       const commands = [ 'eval $(minikube -p minikube docker-env)',
+       const commands = [ 'pwd','eval $(minikube -p minikube docker-env)',
            'docker build -t inspector:1.0.0 ..'
 
         ]
         exec(commands.join(' && '), (error,stdout,stderr) => {
             console.log(error);console.log(stdout);console.log(stderr);
         })
+        console.log("BUILT INSPECTOR")
         // await buildInspector(docker);
         await installIstioManifest();
     }
