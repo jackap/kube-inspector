@@ -7,7 +7,13 @@ export async function installIstioManifest(){
     return new Promise(function(resolve,reject ){
         console.log('[Istio]: Install istio manifest');
       // TODO: fetch istio version from env file
-        const out = child_process.spawnSync('./istio-1.6.0/bin/istioctl', [
+        let out = child_process.spawnSync('./istio-1.6.0/bin/istioctl', [
+            'manifest',
+            'apply',
+            '--set',
+            'profile=demo'
+        ]);
+        out = child_process.spawnSync('./istio-1.6.0/bin/istioctl', [
             'manifest',
             'apply',
             '--set',
