@@ -20,7 +20,7 @@ function deleteExistingCluster(){
 
 function createNewCluster(){
     const out = child_process.spawnSync('minikube', [
-        'start', '--vm-driver=none',
+        'start', '--vm-driver=docker',
        // '--memory=7000',
         //'--cpus=4',
        // '--disk-size=40g',
