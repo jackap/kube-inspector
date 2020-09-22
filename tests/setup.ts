@@ -2,7 +2,6 @@ import {getDockerCredentialsFromMinikube, getDockerEnv, getServiceUrl, setupMini
 import {applyInspector, buildInspector} from "./inspector";
 import {installIstioManifest} from "./istio";
 import * as child_process from "child_process";
-import {exec} from "child_process";
 const Docker = require('dockerode');
 const K8s = require('k8s');
 
@@ -47,25 +46,27 @@ export const waitPodsWithStatus = async (kubectl,status='Running') => {
 }
 
 export async function setupTests(){
+    let env;
     const kubectl = K8s.kubectl({
         binary: 'kubectl'
         ,version: '/api/v1'
     });
-
+    try {
+        env = await getDockerEnv();
+        const credentials = getDockerCredentialsFromMinikube(env);
+        console.info('Logging into docker using IP ',credentials.host);
+    }
+    catch (e) {
         console.info('Starting minikube from scratch');
-        await setupMinikube()//.then(getDockerEnv);
-        //const credentials = getDockerCredentialsFromMinikube(env);
-        //console.info('Logging into docker using IP ',credentials.host);
-        //const docker = new Docker({
-        //    ...credentials
-       // });
-       const commands = [ 'pwd','eval $(minikube -p minikube docker-env)',
-           'docker build -t inspector:1.0.0 ..'
-
-        ]
-        exec(commands.join(' && '))
-        // await buildInspector(docker);
+        env = await setupMinikube().then(getDockerEnv);
+        const credentials = getDockerCredentialsFromMinikube(env);
+        console.info('Logging into docker using IP ',credentials.host);
+        const docker = new Docker({
+            ...credentials
+        });
+        await buildInspector(docker);
         await installIstioManifest();
+    }
 
     await waitPodsWithStatus(kubectl);
     return kubectl;
