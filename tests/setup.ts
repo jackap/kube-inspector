@@ -63,9 +63,7 @@ export async function setupTests(){
            'docker build -t inspector:1.0.0 ..'
 
         ]
-        exec(commands.join(' && '), (error,stdout,stderr) => {
-            console.log(error);console.log(stdout);console.log(stderr);
-        })
+        exec(commands.join(' && '))
         // await buildInspector(docker);
         await installIstioManifest();
 

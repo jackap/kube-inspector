@@ -7,15 +7,9 @@ export async function installIstioManifest(){
     return new Promise(function(resolve,reject ){
         console.log('[Istio]: Install istio manifest');
       // TODO: fetch istio version from env file
-        let out = child_process.spawnSync('./istio-1.6.0/bin/istioctl', [
+        let out = child_process.spawnSync('./istio-1.7.2/bin/istioctl', [
             'manifest',
-            'apply',
-            '--set',
-            'profile=demo'
-        ]);
-        out = child_process.spawnSync('./istio-1.6.0/bin/istioctl', [
-            'manifest',
-            'apply',
+            'install',
             '--set',
             'profile=demo'
         ]);
@@ -46,16 +40,16 @@ export async function installIstio(kubectl,namespace='default'){
     }
 
         await kubectl.command(`label namespace ${namespace} istio-injection=enabled --overwrite`)
-        await kubectl.command(`apply -f ./istio-1.6.0/samples/bookinfo/platform/kube/bookinfo.yaml -n ${namespace}`)
-        await kubectl.command(`apply -f ./istio-1.6.0/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`)
+        await kubectl.command(`apply -f ./istio-1.7.2/samples/bookinfo/platform/kube/bookinfo.yaml -n ${namespace}`)
+        await kubectl.command(`apply -f ./istio-1.7.2/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`)
 }
 
 export async function deleteIstio(kubectl,namespace='default'){
     console.log(`Deleting istio on ${namespace} namespace...`);
 
 
-    await kubectl.command(`delete -f ./istio-1.6.0/samples/bookinfo/platform/kube/bookinfo.yaml -n ${namespace}`);
-    await kubectl.command(`delete -f ./istio-1.6.0/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`);
+    await kubectl.command(`delete -f ./istio-1.7.2/samples/bookinfo/platform/kube/bookinfo.yaml -n ${namespace}`);
+    await kubectl.command(`delete -f ./istio-1.7.2/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`);
 
     if (namespace !== 'default'){
         await kubectl.command(`delete namespace ${namespace}` )
