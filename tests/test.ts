@@ -116,7 +116,7 @@ describe('Kubernetes cluster tests with istio', () => {
 
 });
 
-describe.skip('Kubernetes cluster tests with istio and calico', () =>{
+describe('Kubernetes cluster tests with istio and calico', () =>{
     let kubectl;
     beforeAll(async () => {
         jest.setTimeout(60 * 20 * 1000); // 20 minutes
@@ -127,7 +127,7 @@ describe.skip('Kubernetes cluster tests with istio and calico', () =>{
     afterEach(async () => {
         await verifyNoActivePods(kubectl)
      //   exec('minikube stop && kubectl config use-context minikube')
-        await setupMinikube()
+     //   await setupMinikube()
     });
     afterAll(async () => await deleteCalico(kubectl));
 
@@ -155,7 +155,7 @@ describe.skip('Kubernetes cluster tests with istio and calico', () =>{
 
     });
 
-    it.skip('Istio bookinfo example on multiple namespaces', async () => {
+    it('Istio bookinfo example on multiple namespaces', async () => {
 
 
         try {
@@ -183,8 +183,7 @@ describe.skip('Kubernetes cluster tests with istio and calico', () =>{
 
     });
 
-    it.skip
-    ('Istio bookinfo example on single namespace and calico rules', async () => {
+    it('Istio bookinfo example on single namespace and calico rules', async () => {
 
         await installIstio(kubectl);
         const inspectorUrl = await installInspector(kubectl);
@@ -206,8 +205,7 @@ describe.skip('Kubernetes cluster tests with istio and calico', () =>{
 
     },_10MINUTES);
 
-    it.skip
-    ('Istio bookinfo example on multiple namespace', async () => {
+    it('Istio bookinfo example on multiple namespace', async () => {
 
 
         try {
