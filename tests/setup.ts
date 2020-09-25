@@ -21,6 +21,9 @@ const statusHandler = async (kubectl,status) => {
          return curr_status === status
 
      });
+     if (pods.items.length !== 0 && !someAreNotRunning){
+         return {someAreNotRunning: true, podsWithDifferentStatus: pods.items}
+     }
      return {someAreNotRunning,podsWithDifferentStatus}
 };
 function timeout(ms) {

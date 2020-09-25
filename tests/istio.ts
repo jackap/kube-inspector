@@ -52,6 +52,7 @@ export async function deleteIstio(kubectl,namespace='default'){
     await kubectl.command(`delete -f ./istio-1.7.2/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`);
 
     if (namespace !== 'default'){
+        console.log(`Deleting ${namespace} namespace...`);
         await kubectl.command(`delete namespace ${namespace}` )
     }
 }
