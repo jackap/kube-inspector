@@ -9,7 +9,8 @@
     "start:watch": "nodemon",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "lint": "tslint -p ."
+    "lint": "tslint -p .",
+    "lint:fix": "tslint -p . --fix"
   },
   "author": "",
   "license": "ISC",
