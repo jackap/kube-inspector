@@ -32,6 +32,6 @@ export async function applyInspector(kubectl) {
 }
 
 export async function deleteInspector(kubectl) {
-
+    console.info('Deleting inspector...')
     return await kubectl.command('delete -f ../services/inspector.yaml').then(kubectl.command('delete -f ../deployments/inspector.yaml'));
 }
