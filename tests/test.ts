@@ -154,7 +154,8 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
 
     });
 
-    it('Istio bookinfo example on multiple namespaces', async () => {
+    xit('Installing Istio bookinfo example on multiple namespaces with calico ' +
+        'enabled does not enforce any security policy ', async () => {
 
 
         try {
@@ -171,6 +172,8 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
 
             expect(inspectorResponse[0].namespaces).toMatchObject(
                 ['default',
+                    'istio-system',
+                    'kube-system',
                     'test-namespace',
                     null]);
         } finally {
@@ -182,7 +185,7 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
 
     });
 
-    xit('Istio bookinfo example on single namespace and calico rules', async () => {
+    it('Istio bookinfo example on single namespace and calico rules', async () => {
 
         await installIstio(kubectl);
         const inspectorUrl = await installInspector(kubectl);

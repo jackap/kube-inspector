@@ -48,6 +48,14 @@ export const waitPodsWithStatus = async (kubectl,status='Running') => {
     return
 }
 
+function buildInspectorFromCommandLine() {
+    const commands = ['pwd', 'eval $(minikube -p minikube docker-env)',
+        'docker build -t inspector:1.0.0 ..'
+
+    ]
+    exec(commands.join(' && '));
+}
+
 export async function setupTests(){
     let env;
     const kubectl = K8s.kubectl({
@@ -72,11 +80,7 @@ export async function setupTests(){
             ...credentials
         });
         //await buildInspector(docker);
-        const commands = [ 'pwd','eval $(minikube -p minikube docker-env)',
-            'docker build -t inspector:1.0.0 ..'
-
-        ]
-        exec(commands.join(' && '));
+        buildInspectorFromCommandLine();
         await installIstioManifest();
     }
 
