@@ -45,10 +45,12 @@ jobs:
         k8s-version: 1.19.2
     - uses: satackey/action-docker-layer-caching@v0.0.8
       name: Docker  layer caching
+    - name: Prepare testing
+      run: |
+        pushd tests
+        ./ci.sh
+        popd
     - name: Testing
       run: |
         cd tests
         npm run test
-    - name: Get minikube output
-      run: |
-        minikube logs
