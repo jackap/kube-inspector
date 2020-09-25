@@ -17,7 +17,7 @@ const verifyNoActivePods = async (kubectl) => {
     expect(pods.items.length).toBe(0)
 };
 const _10MINUTES = 60 * 20 * 1000
-describe('Test mechanism works', () => {
+xdescribe('Test mechanism works', () => {
     let kubectl;
     beforeAll(async () => {
         jest.setTimeout(60 * 20 * 1000); // 20 minutes
@@ -42,7 +42,7 @@ describe('Test mechanism works', () => {
     });
 });
 
-describe('Kubernetes cluster tests with istio', () => {
+xdescribe('Kubernetes cluster tests with istio', () => {
     let kubectl;
     beforeAll(async () => {
         jest.setTimeout(60 * 20 * 1000); // 20 minutes
@@ -126,12 +126,12 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
 
     afterEach(async () => {
         await verifyNoActivePods(kubectl)
-     //   exec('minikube stop && kubectl config use-context minikube')
-     //   await setupMinikube()
+        exec('minikube stop && kubectl config use-context minikube && minikube start')
+       // await setupMinikube()
     });
     afterAll(async () => await deleteCalico(kubectl));
 
-    it('Istio bookinfo example on single namespace and calico', async () => {
+    xit('Istio bookinfo example on single namespace and calico', async () => {
 
         await installIstio(kubectl);
         const inspectorUrl = await installInspector(kubectl);
