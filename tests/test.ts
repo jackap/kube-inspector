@@ -125,7 +125,7 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
     });
 
     afterEach(async () => {
-        await verifyNoActivePods(kubectl).then( () =>exec('minikube stop && kubectl config use-context minikube && minikube start'))
+        await verifyNoActivePods(kubectl);
        // await setupMinikube()
     });
     afterAll(async () => await deleteCalico(kubectl));
