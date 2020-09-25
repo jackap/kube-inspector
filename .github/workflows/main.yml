@@ -41,7 +41,7 @@ jobs:
         popd
     - uses: opsgang/ga-setup-minikube@v0.1.1
       with:
-        minikube-version: 1.12.0
+        minikube-version:  1.13.1
         k8s-version: 1.19.2
     - uses: satackey/action-docker-layer-caching@v0.0.8
       name: Docker  layer caching
