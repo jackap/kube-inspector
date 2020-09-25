@@ -23,9 +23,7 @@ function createNewCluster(){
         'start', '--vm-driver=docker',
         '--memory=6500',
         '--cpus=2',
-       // '--disk-size=40g',
-        '--network-plugin=cni',
-        '--enable-default-cni',
+        '--network-plugin=cni'
     ]);
 
    return handleMinikubeOutput(out);
