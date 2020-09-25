@@ -194,6 +194,7 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
         let inspectorResponse;
         try {
             inspectorResponse = await inspect(inspectorUrl);
+            console.log(inspectorResponse)
             expect(inspectorResponse.length).toBe(1);
             expect(inspectorResponse[0].services.default).toBeUndefined();
             expect(inspectorResponse[0].namespaces).toMatchObject(
