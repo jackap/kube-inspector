@@ -1,5 +1,10 @@
 export async function installCalico(kubectl){
-    await kubectl.command('apply -f https://docs.projectcalico.org/manifests/calico.yaml').catch();
+    try{
+        await kubectl.command('apply -f https://docs.projectcalico.org/manifests/calico.yaml');
+    }
+    catch (e) {
+       console.error(e)
+    }
 
 
 }
