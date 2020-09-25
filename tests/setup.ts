@@ -28,17 +28,19 @@ function timeout(ms) {
 }
 export const waitPodsWithStatus = async (kubectl,status='Running') => {
     let someAreNotRunning = true;
-    let miss_count = 0;
+    let miss_count = 1;
     while (someAreNotRunning) {
         miss_count +=1;
         const retval  = await statusHandler(kubectl,status);
         someAreNotRunning = retval.someAreNotRunning;
         if (someAreNotRunning) {
-            if (miss_count % 10 === 0)
+            if (miss_count % 10 === 0){
                 console.info(`Not all pods have state ${status}!`,retval.podsWithDifferentStatus);
-            if (miss_count % 15 === 0){
+            }
+            else if (miss_count % 25 === 0){
                 const out  = child_process.spawnSync('kubectl',['describe', 'pods']);
                 console.error(out.stdout.toString());
+                // TODO: Here I should exit with error
             }
             await timeout(6000);
         }
@@ -58,9 +60,7 @@ export async function setupTests(){
             'docker build -t inspector:1.0.0 ..'
 
         ]
-        exec(commands.join(' && '), (error,stdout,stderr) => {
-            console.log(error);console.log(stdout);console.log(stderr);
-        })
+        exec(commands.join(' && '));
         console.info('Logging into docker');
     }
     catch (e) {
@@ -76,9 +76,7 @@ export async function setupTests(){
             'docker build -t inspector:1.0.0 ..'
 
         ]
-        exec(commands.join(' && '), (error,stdout,stderr) => {
-            console.log(error);console.log(stdout);console.log(stderr);
-        })
+        exec(commands.join(' && '));
         await installIstioManifest();
     }
 
