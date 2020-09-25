@@ -9,6 +9,7 @@ export async function inspect(inspectorUrl){
         // if anything throws, we retry
         const res = await fetch(inspectorUrl+INSPECT_ENDPOINT, {timeout: 600*1000});
         const data = await res.json();
+        console.debug(data)
         return data;
     }, {
         retries: 10
