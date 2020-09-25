@@ -1,5 +1,6 @@
 export async function installCalico(kubectl){
     try{
+        console.log("[Calico] Install calico")
         await kubectl.command('apply -f https://docs.projectcalico.org/manifests/calico.yaml');
     }
     catch (e) {
@@ -10,7 +11,12 @@ export async function installCalico(kubectl){
 }
 
 export async function deleteCalico(kubectl){
-    await kubectl.command('delete -f https://docs.projectcalico.org/manifests/calico.yaml').catch();
+    try {
+        console.log("[Calico] Delete calico")
+        await kubectl.command('delete -f https://docs.projectcalico.org/manifests/calico.yaml');
+    } catch (e) {
+        console.error(e)
+    }
 
 
 }
@@ -21,6 +27,7 @@ export async function applyDenyToDefaultNamespace(kubectl){
 }
 
 export async function applyDenyToAllNamespaces(kubectl){
+    console.info('Applying default-deny to all namespaces');
     await kubectl.command('apply -f default-deny.yaml');
 }
 
