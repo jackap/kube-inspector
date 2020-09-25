@@ -1,6 +1,6 @@
 import {NmapResult} from "../../src/interfaces";
 
-export const results: Array<NmapResult>= [
+export const results: NmapResult[]= [
     {hostname: null,
         ip: '10.1.0.1',
         mac: '76:86:6D:5D:69:C8',

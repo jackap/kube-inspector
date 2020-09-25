@@ -6,3 +6,12 @@ export interface NmapResult {
     osNmap: string|null,
     vendor: null|undefined
 }
+
+export interface ProcessedServiceData {
+    [key: string]: string | undefined;
+}
+
+export interface ProcessedNmapData {
+    namespaces : (string | undefined)[];
+    services: ProcessedServiceData
+}

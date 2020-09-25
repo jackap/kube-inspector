@@ -5,7 +5,7 @@ import {NmapResult} from "../src/interfaces";
 
 describe("Nmap positve results", () => {
     const hostname = '10-1-0-2.kube-dns.kube-system.svc.cluster.local';
-    const nmapResults: Array<NmapResult> = [
+    const nmapResults: NmapResult[] = [
         { hostname: '10-1-0-2.foo.kube-system.svc.cluster.local',
             ip: '10.1.0.2',
             mac: '92:74:21:4F:07:91',

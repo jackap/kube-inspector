@@ -33,7 +33,7 @@ describe('Inspect endpoint', () => {
             }
         }];
         const scanIpRangeStub  = scanIpRange as jest.Mock<Promise<NmapResult[]>>;
-        const getIpAddressStub  = getIPAddresses as jest.Mock<String[]>;
+        const getIpAddressStub  = getIPAddresses as jest.Mock<string[]>;
 
         scanIpRangeStub.mockReturnValue(Promise.resolve(results));
         getIpAddressStub.mockReturnValue(['fooo'])
