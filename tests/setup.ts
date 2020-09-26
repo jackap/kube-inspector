@@ -21,27 +21,24 @@ const statusHandler = async (kubectl,status) => {
          return curr_status === status
 
      });
-     if (pods.items.length !== 0 && !someAreNotRunning){
-         return {someAreNotRunning: true, podsWithDifferentStatus: pods.items}
-     }
      return {someAreNotRunning,podsWithDifferentStatus}
 };
 function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-export const waitPodsWithStatus = async (kubectl,status='Running') => {
+
+async function waitPodsWithDefaultStates(kubectl, status: string) {
     let someAreNotRunning = true;
     let miss_count = 1;
     while (someAreNotRunning) {
-        miss_count +=1;
-        const retval  = await statusHandler(kubectl,status);
+        miss_count += 1;
+        const retval = await statusHandler(kubectl, status);
         someAreNotRunning = retval.someAreNotRunning;
         if (someAreNotRunning) {
-            if (miss_count % 10 === 0){
-                console.info(`Not all pods have state ${status}!`,retval.podsWithDifferentStatus);
-            }
-            else if (miss_count % 25 === 0){
-                const out  = child_process.spawnSync('kubectl',['describe', 'pods']);
+            if (miss_count % 10 === 0) {
+                console.info(`Not all pods have state ${status}!`, retval.podsWithDifferentStatus);
+            } else if (miss_count % 25 === 0) {
+                const out = child_process.spawnSync('kubectl', ['describe', 'pods']);
                 console.error(out.stdout.toString());
                 // TODO: Here I should exit with error
             }
@@ -49,6 +46,28 @@ export const waitPodsWithStatus = async (kubectl,status='Running') => {
         }
     }
     return
+}
+
+async function waitPodsToTerminate(kubectl: any) {
+    console.log("[KILLING PODS]")
+    let pods = await kubectl.pod.list()
+    while (pods.items.length !== 0) {
+        console.info(`Not all pods are Terminating!`);
+        await timeout(6000);
+        pods = await kubectl.pod.list();
+    }
+    console.info("ALL PODS TERMINATED")
+    return;
+}
+
+export const waitPodsWithStatus = async (kubectl,status='Running') => {
+    console.log(`Wait pods with status ${status}`);
+    if (status !== 'Terminating'){
+        return await waitPodsWithDefaultStates(kubectl, status);
+    }
+    else {
+        return await waitPodsToTerminate(kubectl);
+    }
 }
 
 function buildInspectorFromCommandLine() {

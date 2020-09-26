@@ -10,23 +10,34 @@ import {
 } from "./calico";
 import {deleteIstio, installIstio} from "./istio";
 import {exec} from "child_process";
-import {setupMinikube} from "./minikube";
 const K8s = require('k8s');
 
+const kubectl = K8s.kubectl({
+    binary: 'kubectl'
+    ,version: '/api/v1'
+});
 
 const verifyNoActivePods = async (kubectl) => {
     const pods = await kubectl.pod.list();
+    if(pods.items.length !== 0){
+        console.error(pods.items)
+    }
     expect(pods.items.length).toBe(0)
 };
+
+const withCleanupSingleNamespace = async (caller: () => Promise<void>) => {
+    await caller
+    await kubectl.command("delete --all pods --namespace=default")
+    await kubectl.command("delete --all deployments --namespace=default");
+    await kubectl.command("delete --all services --namespace=default")
+
+}
+
 const _10MINUTES = 60 * 20 * 1000
 xdescribe('Test mechanism works', () => {
-    let kubectl;
+
     beforeAll(async () => {
         jest.setTimeout(60 * 20 * 1000); // 20 minutes
-        kubectl = K8s.kubectl({
-            binary: 'kubectl'
-            ,version: '/api/v1'
-        });
     });
 
     afterEach( async () => {
@@ -124,30 +135,27 @@ xdescribe('Kubernetes cluster tests with istio', () => {
 });
 
 describe('Kubernetes cluster tests with istio and calico', () =>{
-    let kubectl;
     beforeAll(async () => {
         jest.setTimeout(60 * 20 * 1000); // 20 minutes
-        kubectl = K8s.kubectl({
-            binary: 'kubectl'
-            ,version: '/api/v1'
-        });
          await installCalico(kubectl);
     });
 
     afterEach(async () => {
+        await kubectl.command("delete --all pods --namespace=default")
+        await kubectl.command("delete --all deployments --namespace=default");
+        await kubectl.command("delete --all services --namespace=default")
+      //  await kubectl.command("delete namespace test-namespace").catch()
         // FIXME: verify also that pods are not running in test-namespace
-        await verifyNoActivePods(kubectl);
+        await verifyNoActivePods(kubectl)
         console.log(`Test Ended`)
     });
     afterAll(async () => await deleteCalico(kubectl));
 
     it('Istio bookinfo example on single namespace and calico', async () => {
-
-        await installIstio(kubectl);
-        const inspectorUrl = await installInspector(kubectl);
-        await waitPodsWithStatus(kubectl);
-        let inspectorResponse;
-        try {
+            await installIstio(kubectl);
+            const inspectorUrl = await installInspector(kubectl);
+            await waitPodsWithStatus(kubectl);
+            let inspectorResponse;
             inspectorResponse = await inspect(inspectorUrl);
             expect(inspectorResponse.length).toBe(1);
             expect(inspectorResponse[0].services.default).toMatchSnapshot();
@@ -155,19 +163,16 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
             expect(inspectorResponse[0].namespaces).toMatchObject(
                 ['default',
                     null]);
-        } finally {
-            await deleteInspector(kubectl);
-            await deleteIstio(kubectl);
-            await waitPodsWithStatus(kubectl, 'Terminating');
-        }
 
+            await deleteIstio(kubectl);
+            await deleteInspector(kubectl);
+            await waitPodsWithStatus(kubectl, 'Terminating');
     });
 
     it('Installing Istio bookinfo example on multiple namespaces with calico ' +
         'enabled hides istio and kube-system namespaces', async () => {
 
 
-        try {
             await installIstio(kubectl);
             await installIstio(kubectl, 'test-namespace');
             const inspectorUrl = await installInspector(kubectl);
@@ -183,16 +188,14 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
                 ['default',
                     'test-namespace',
                     null]);
-        } finally {
             await deleteIstio(kubectl);
             await deleteIstio(kubectl, 'test-namespace');
             await deleteInspector(kubectl);
             await waitPodsWithStatus(kubectl, 'Terminating');
-        }
 
     });
 
-    xit('Istio bookinfo example on single namespace and calico rules', async () => {
+    it('Istio bookinfo example on single namespace and calico rules', async () => {
 
         await installIstio(kubectl);
         const inspectorUrl = await installInspector(kubectl);
@@ -214,7 +217,7 @@ describe('Kubernetes cluster tests with istio and calico', () =>{
 
     },_10MINUTES);
 
-    xit('Istio bookinfo example on multiple namespace and calico rules', async () => {
+    it('Istio bookinfo example on multiple namespace and calico rules', async () => {
 
 
         try {

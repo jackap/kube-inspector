@@ -48,8 +48,8 @@ export async function deleteIstio(kubectl,namespace='default'){
     console.log(`Deleting istio on ${namespace} namespace...`);
 
 
-    await kubectl.command(`delete -f ./istio-1.7.2/samples/bookinfo/platform/kube/bookinfo.yaml -n ${namespace}`);
-    await kubectl.command(`delete -f ./istio-1.7.2/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`);
+    await kubectl.command(`delete -f ./istio-1.7.2/samples/bookinfo/platform/kube/bookinfo.yaml -n ${namespace}`).catch();
+    await kubectl.command(`delete -f ./istio-1.7.2/samples/bookinfo/networking/bookinfo-gateway.yaml -n ${namespace}`).catch();
 
     if (namespace !== 'default'){
         console.log(`Deleting ${namespace} namespace...`);
