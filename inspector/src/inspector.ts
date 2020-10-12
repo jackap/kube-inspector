@@ -1,11 +1,14 @@
 "use strict";
 
+import { fetchDNSResults } from "./extractors/dns";
+import { isDockerEnabled } from "./extractors/docker";
+import { hasInternetAccess } from "./extractors/internetAccess";
+import {
+  getNamespaces,
+  getServicesRunningOnNamespaces
+} from "./extractors/kubernetes";
 import { NmapResult, ProcessedNmapData } from "./interfaces";
 import { getIPAddresses, scanIpRange } from "./utils";
-import {getNamespaces, getServicesRunningOnNamespaces} from "./extractors/kubernetes";
-import {fetchDNSResults} from "./extractors/dns";
-import {isDockerEnabled} from "./extractors/docker";
-import {hasInternetAccess} from "./extractors/internetAccess";
 
 export async function processNmapData(
   data: NmapResult[]
