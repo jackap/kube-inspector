@@ -1,6 +1,4 @@
-// @ts-ignore
-// @ts-ignore
-import * as eventToPromise from "event-to-promise";
+import eventToPromise from "event-to-promise";
 // @ts-ignore
 import * as nmap from "node-nmap";
 import * as os from "os";
