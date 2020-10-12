@@ -7,7 +7,7 @@ const Docker = require('dockerode');
 const K8s = require('k8s');
 
 const statusHandler = async (kubectl,status) => {
-    const pods = await kubectl.pod.list();
+    let pods = await kubectl.pod.list(undefined,['--all-namespaces']);
     const statuses = pods.items.map((item) => item.status.phase);
     const podsWithDifferentStatus = pods.items
         .filter( (pod) => pod.status.phase !== status)
@@ -50,7 +50,7 @@ async function waitPodsWithDefaultStates(kubectl, status: string) {
 
 async function waitPodsToTerminate(kubectl: any) {
     console.log("[KILLING PODS]")
-    let pods = await kubectl.pod.list()
+    let pods = await kubectl.pod.list(undefined,['--all-namespaces']);
     while (pods.items.length !== 0) {
         console.info(`Not all pods are Terminating!`);
         await timeout(6000);

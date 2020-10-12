@@ -65,3 +65,14 @@ Array [
   "reviews",
 ]
 `;
+
+exports[`Kubernetes cluster tests with istio and calico Istio bookinfo example on single namespace and calico rules 1`] = `
+Array [
+  "details",
+  "productpage",
+  "ratings",
+  "reviews",
+  "reviews",
+  "reviews",
+]
+`;
