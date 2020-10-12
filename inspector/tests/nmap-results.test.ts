@@ -1,10 +1,7 @@
 import { expect } from "chai";
-import {
-  getNamespace,
-  getService,
-  getServicesRunningOnNamespaces
-} from "../src/extractors";
+
 import { NmapResult } from "../src/interfaces";
+import {getNamespace, getService, getServicesRunningOnNamespaces} from "../src/extractors/kubernetes";
 
 describe("Nmap positve results", () => {
   const hostname = "10-1-0-2.kube-dns.kube-system.svc.cluster.local";
