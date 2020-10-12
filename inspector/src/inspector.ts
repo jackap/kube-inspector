@@ -16,7 +16,7 @@ export async function processNmapData(
     dns: await fetchDNSResults(data),
     options: {
       docker: await isDockerEnabled(),
-      hasInternetAccess: hasInternetAccess()
+      hasInternetAccess: await hasInternetAccess()
     }
   };
 
