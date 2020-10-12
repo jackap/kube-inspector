@@ -17,11 +17,14 @@ export const getDnsNames = async (hostname: string | null) => {
     if (!address || !kubernetesAddress){
         return null;
     }
-    return { hostname, addresses: [address, kubernetesAddress] };
+    const output = { hostname, addresses: [address.address, kubernetesAddress.address] };
+    console.log(output)
+    return output;
 };
 export const fetchDNSResults = async (data: NmapResult[]) => {
-    return data
-        .filter(element => hasDefaultHostname(element.hostname))
-        .map(async entry => await getDnsNames(entry.hostname))
-        .filter(async result => result !== null  || result !== {})
+    const filteredData = data
+        .filter(element => hasDefaultHostname(element.hostname));
+    console.log(filteredData)
+    return Promise.all(filteredData
+        .map(entry => getDnsNames(entry.hostname)))
 };
