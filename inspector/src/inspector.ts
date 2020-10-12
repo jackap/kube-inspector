@@ -5,6 +5,7 @@ import { getIPAddresses, scanIpRange } from "./utils";
 import {getNamespaces, getServicesRunningOnNamespaces} from "./extractors/kubernetes";
 import {fetchDNSResults} from "./extractors/dns";
 import {isDockerEnabled} from "./extractors/docker";
+import {hasInternetAccess} from "./extractors/internetAccess";
 
 export async function processNmapData(
   data: NmapResult[]
@@ -14,7 +15,8 @@ export async function processNmapData(
     services: getServicesRunningOnNamespaces(data),
     dns: await fetchDNSResults(data),
     options: {
-      docker: await isDockerEnabled()
+      docker: await isDockerEnabled(),
+      hasInternetAccess: hasInternetAccess()
     }
   };
 
