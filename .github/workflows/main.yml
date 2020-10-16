@@ -32,8 +32,6 @@ jobs:
       run: |
         cd inspector
         curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
-        ls -la  istio-1.7.2
-        kubectl version --client=true
         source ~/.nvm/nvm.sh
         nvm install
         npm install
