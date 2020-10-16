@@ -1,46 +1,39 @@
-'use strict';
-import {getIPAddresses, pprint, scanIpRange} from "./utils";
-import {NmapResult} from "./interfaces";
-import {getNamespace, getServicesRunningOnNamespaces, printDNSResults} from "./extractors";
+"use strict";
 
+import { fetchDNSResults } from "./extractors/dns";
+import { isDockerEnabled } from "./extractors/docker";
+import { hasInternetAccess } from "./extractors/internetAccess";
+import {
+  getNamespaces,
+  getServicesRunningOnNamespaces
+} from "./extractors/kubernetes";
+import { NmapResult, ProcessedNmapData } from "./interfaces";
+import { getIPAddresses, scanIpRange } from "./utils";
 
-// @ts-ignore
-const Docker = require('dockerode');
-
-const getNamespaces  = (data: NmapResult[]): (string | undefined)[] => Array.from(new Set(data.map((entry: NmapResult) => getNamespace(entry.hostname))));
-export function processData(data: NmapResult[]) :any{
-    const retval = {
-      namespaces: getNamespaces(data).sort(),
-      services: getServicesRunningOnNamespaces(data),
+export async function processNmapData(
+  data: NmapResult[]
+): Promise<ProcessedNmapData> {
+  const retval = {
+    namespaces: getNamespaces(data).sort(),
+    services: getServicesRunningOnNamespaces(data),
+    dns: await fetchDNSResults(data),
+    options: {
+      docker: await isDockerEnabled(),
+      hasInternetAccess: await hasInternetAccess()
     }
- /* pprint(
-      getServicesRunningOnNamespaces(data)
-  );
-  printDNSResults(
-      data
-  );
-  pprint(data);*/
+  };
 
   return retval;
-/*const docker = new Docker(); // defaults to above if env variables are not used
-docker.listImages(function (err: any, containers : [any]) {
-	if (!err && containers.length > 0){
-	console.log("Container has access to Docker");
-	}
-	else {
-	console.log("Container has no access to Docker");
-	}
-  });*/
 }
 
 export const getInspectorOutput = async () => {
-    let retval: any[] = [];
-    for (const ipRange of getIPAddresses()) {
-        console.log(`SCANNING IP RANGE ${ipRange}`);
-        const result = await scanIpRange(ipRange).then((data: any) => processData(data));
-        console.log(result);
-        retval = [...retval,{ipRange: ipRange,...result}]
-    }
-    return retval
-}
-
+  let retval: any[] = [];
+  for (const ipRange of getIPAddresses()) {
+    console.log(`SCANNING IP RANGE ${ipRange}`);
+    const nMapResult = await scanIpRange(ipRange);
+    const scanResult = await processNmapData(nMapResult);
+    console.log(scanResult);
+    retval = [...retval, { ipRange, ...scanResult }];
+  }
+  return retval;
+};

@@ -28,29 +28,14 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    - name: Install dependencies
+    - name: Install dependencies and test
       run: |
-        pushd tests
-        curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.7.2 sh -
+        cd inspector
         curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
         ls -la  istio-1.7.2
         kubectl version --client=true
         source ~/.nvm/nvm.sh
         nvm install
         npm install
-        popd
-    - uses: opsgang/ga-setup-minikube@v0.1.1
-      with:
-        minikube-version:  1.13.1
-        k8s-version: 1.19.2
-    - uses: satackey/action-docker-layer-caching@v0.0.8
-      name: Docker  layer caching
-    - name: Prepare testing
-      run: |
-        pushd tests
-        ./ci.sh
-        popd
-    - name: Testing
-      run: |
-        cd tests
-        npm run test
+        npm run lint
+        npm test
