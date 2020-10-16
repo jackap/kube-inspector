@@ -1,6 +1,6 @@
 import { NmapResult, ProcessedServiceData } from "../interfaces";
 
-export const getNamespaces = (data: NmapResult[]): (string | undefined)[] =>
+export const getNamespaces = (data: NmapResult[]): Array<string | undefined> =>
   Array.from(
     new Set(data.map((entry: NmapResult) => getNamespace(entry.hostname)))
   );
@@ -14,7 +14,9 @@ export const getServicesRunningOnNamespaces = (
   data.reduce((acc: any, current) => {
     const service = getService(current.hostname);
     const namespace: string | undefined = getNamespace(current.hostname);
-    if (!namespace || namespace == null) return acc;
+    if (!namespace || namespace == null) {
+      return acc;
+    }
     return {
       ...acc,
       [namespace]: acc[namespace]

@@ -1,14 +1,16 @@
 import { NmapResult } from "../src/interfaces";
 
 jest.mock("../src/utils.ts");
-
+jest.mock("../src/extractors/dns");
 import request from "supertest";
+import { getDnsNames } from "../src/extractors/dns";
 import { createInspectorServer } from "../src/server";
 import { getIPAddresses, scanIpRange } from "../src/utils";
 import { results } from "./fixtures/nmap-results";
 
 describe("Inspect endpoint", () => {
   it("returns correct data", async () => {
+    jest.setTimeout(10000);
     const expectedBody = [
       {
         ipRange: "fooo",
@@ -33,12 +35,20 @@ describe("Inspect endpoint", () => {
             "prometheus",
             "zipkin"
           ]
-        }
+        },
+        options: { docker: false, hasInternetAccess: true }
       }
     ];
     const scanIpRangeStub = scanIpRange as jest.Mock<Promise<NmapResult[]>>;
     const getIpAddressStub = getIPAddresses as jest.Mock<string[]>;
+    const getDnsNamesStub = getDnsNames as jest.Mock<Promise<any>>;
 
+    getDnsNamesStub.mockReturnValue(
+      Promise.resolve({
+        hostname: "test-dns",
+        addresses: []
+      })
+    );
     scanIpRangeStub.mockReturnValue(Promise.resolve(results));
     getIpAddressStub.mockReturnValue(["fooo"]);
     const app = createInspectorServer();

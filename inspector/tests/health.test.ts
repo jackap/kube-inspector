@@ -8,7 +8,9 @@ describe("Health check", () => {
       .get("/healthz/ready")
       .expect(200, "OK")
       .end((err: Error) => {
-        if (err) throw err;
+        if (err) {
+          throw err;
+        }
       });
     done();
   });

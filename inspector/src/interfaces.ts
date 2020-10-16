@@ -12,6 +12,6 @@ export interface ProcessedServiceData {
 }
 
 export interface ProcessedNmapData {
-  namespaces: (string | undefined)[];
+  namespaces: Array<string | undefined>;
   services: ProcessedServiceData;
 }
