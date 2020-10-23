@@ -1,4 +1,4 @@
-# Goal
+## Goal
 
 Nowadays the concept of cattle infrastructure has become very popular. There are several tools
 that can help developers with infrastructure as code and applications can be easily moved from a provider
