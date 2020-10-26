@@ -1,4 +1,3 @@
-import { expect } from "chai";
 
 import {
   getNamespace,
@@ -28,13 +27,13 @@ describe("Nmap positve results", () => {
     }
   ];
   it("Parses namespace", () => {
-    expect(getNamespace(hostname)).equal("kube-system");
+    expect(getNamespace(hostname)).toBe("kube-system");
   });
   it("Parses service", () => {
-    expect(getService(hostname)).equal("kube-dns");
+    expect(getService(hostname)).toBe("kube-dns");
   });
   it("Groups services by namespace", () => {
-    expect(getServicesRunningOnNamespaces(nmapResults)).eql({
+    expect(getServicesRunningOnNamespaces(nmapResults)).toEqual({
       "kube-system": ["bar", "foo"]
     });
   });
@@ -61,12 +60,12 @@ describe("Nmap negative results", () => {
     }
   ];
   it("Does not parse namespace", () => {
-    expect(getNamespace(hostname)).equal(undefined);
+    expect(getNamespace(hostname)).toBeUndefined();
   });
   it("Does not parse service", () => {
-    expect(getService(hostname)).equal(undefined);
+    expect(getService(hostname)).toBeUndefined();
   });
   it("Groups services by namespace", () => {
-    expect(getServicesRunningOnNamespaces(nmapResults)).eql({});
+    expect(getServicesRunningOnNamespaces(nmapResults)).toEqual({});
   });
 });
