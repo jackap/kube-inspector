@@ -149,4 +149,13 @@ Is this beyond kubernetes?
 Should test it also to other systems. 
 Test with helm. 
 syslog entries as well
- 
+
+## Additional questions
+What happens if the attacker is the network?
+It should be possible to intercept proxy all the requests
+from/to each pod.
+We should have another proxy in front  of every container
+and use that to probe the inbound/outbound connections.
+What can we Spoof? If some traffic is blocked, is the
+inbound, or the outbound blocked? 
+
