@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Kubernetes cluster tests with istio and calico Installing Istio bookinfo example on multiple namespaces with calico enabled hides istio and kube-system namespaces 1`] = `
+Array [
+  "details",
+  "productpage",
+  "ratings",
+  "reviews",
+  "reviews",
+  "reviews",
+]
+`;
+
+exports[`Kubernetes cluster tests with istio and calico Installing Istio bookinfo example on multiple namespaces with calico enabled hides istio and kube-system namespaces 2`] = `
+Array [
+  "details",
+  "productpage",
+  "ratings",
+  "reviews",
+  "reviews",
+  "reviews",
+]
+`;
+
+exports[`Kubernetes cluster tests with istio and calico Istio bookinfo example on single namespace and calico 1`] = `
+Array [
+  "details",
+  "productpage",
+  "ratings",
+  "reviews",
+  "reviews",
+  "reviews",
+]
+`;
