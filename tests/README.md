@@ -7,4 +7,5 @@ This folder contains E2E tests for the inspector service which rely on a `miniku
 - istioctl
 
 ## How to run
-Type `npm run test` to run the tests. They should last approximatively 15 minutes. 
+`./test_calico.sh` run tests with calico
+`./test_istio.sh` run tests with istio
