@@ -1,5 +1,5 @@
 # Inspector
-
+![Passes tests](https://github.com/jackap/kubesec/workflows/Test%20kubesec/badge.svg)    
 ## Capabilities
 - Find cluster network topology when using istio and/or calico.
 - Discover root misconfiguration of containers or docker engine.
