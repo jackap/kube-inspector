@@ -1,7 +1,7 @@
-# Inspector
+# Kube-inspector
 ![Passes tests](https://github.com/jackap/kubesec/workflows/Test%20kubesec/badge.svg)    
 
-Inspector is a tool that enables container probing within a kubernetes cluster. 
+kube-inspector is a tool that enables container probing within a kubernetes cluster. 
 
 ## Capabilities
 - Find cluster network topology when using istio and/or calico.
