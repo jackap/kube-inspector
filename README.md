@@ -3,6 +3,11 @@
 
 kube-inspector is a tool that enables container probing within a kubernetes cluster. 
 
+## How it works 
+
+![how-it-works](./documentation/how-it-works.png)
+
+Kubesec executes enumerations commands inside a kubernetes node.
 ## Capabilities
 - Find cluster network topology when using istio and/or calico.
 - Discover root misconfiguration of containers or docker engine.
